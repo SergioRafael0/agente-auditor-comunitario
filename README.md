@@ -114,6 +114,29 @@ pytest --cov=src
 
 ---
 
+## Jupyter / VS Code (recomendado para experimentar)
+
+El venv incluye `ipykernel` y `jupyter` para usar el agente desde notebooks.
+
+**Kernel ya registrado** como "Python (AAC)". En VS Code:
+
+1. Instalar la extensión "Jupyter" de Microsoft (si no la tenés).
+2. `Ctrl+Shift+P` → "Create: New Jupyter Notebook" (o abrí un `.ipynb` existente).
+3. Arriba a la derecha, click en el selector de kernel → elegí **"Python (AAC)"**.
+4. En una celda:
+   ```python
+   from src.agent.auditor import auditar_publicacion
+   resultado = auditar_publicacion("Necesito arreglar el ascensor", "ascensor")
+   resultado
+   ```
+5. La celda devuelve un dict con `estado`, `alertas`, `recomendaciones_generales`, etc.
+
+**Si el kernel no aparece**, recargá VS Code (`Ctrl+Shift+P` → "Reload Window").
+
+**Para notebook clásico de Jupyter** (no VS Code), ejecutá `jupyter notebook` en otra terminal con el venv activado. Abrí la URL que muestra (típicamente `http://localhost:8888`), creá un notebook nuevo y elegí el kernel "Python (AAC)".
+
+---
+
 ## Estructura del proyecto
 
 ```
