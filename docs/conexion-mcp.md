@@ -2,6 +2,22 @@
 
 Cómo conectar el Agente Auditor Comunitario a tu cliente MCP.
 
+## 0. Verificar que el server funciona (sin Claude Desktop)
+
+Antes de conectar un cliente, puedes verificar que el server MCP responde correctamente:
+
+```bash
+python -m scripts.test_mcp_endpoint
+```
+
+Esto lanza el server en un thread, hace las 3 peticiones JSON-RPC del protocolo MCP (initialize, tools/list, tools/call con un caso real) y muestra la respuesta. Tambien guarda la salida completa en `data/eval/mcp_endpoint_demo.json` como evidencia.
+
+Salida esperada:
+- `Status: 200` en las 3 peticiones
+- Session ID devuelto
+- Tool `revisar_publicacion` listada
+- Respuesta del agente con `estado: alerta` y citas a la Ley 21.442
+
 ---
 
 ## 1. Levantar el server

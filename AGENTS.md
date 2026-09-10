@@ -133,7 +133,7 @@ cat data/interacciones.jsonl | tail -20
 
 ## 6. Estado actual
 
-**Última actualización**: sesión 4 — prompt refinado, documentado, 8/8 aciertos.
+**Última actualización**: sesión 7 — informe de 5 páginas generado.
 
 **Hecho**:
 - Estructura de carpetas creada
@@ -141,18 +141,19 @@ cat data/interacciones.jsonl | tail -20
 - Documentos base: `AGENTS.md`, `plan.md`, `PRESENTACION.md`, `README.md`, `.env.example`
 - Esqueleto de código en `src/` (indexer, retriever, agent, mcp_server)
 - Tests pytest que mockean LLM/Chroma para no gastar tokens en CI
-- 18 bugs reales encontrados y arreglados (ver §9)
+- 20 bugs reales encontrados y arreglados (ver §9)
 - **Corpus mixto indexado**: 312 chunks (Ley 21.442 + 5 RIC SEC + 1 Oficio Circular)
 - **Agente funcionando end-to-end** con Groq + RAG, citando correctamente "SEC Norma RIC N°XX" y "Ley 21.442, Artículo N"
 - **Batería de eval de prompts** (`scripts/eval_prompts.py`) con 8 casos representativos
-- **Prompt v2 final** con 2 few-shots correctamente inyectados, documentado en `docs/prompts-decisiones.md` → cubre IE2
+- **Prompt v2 final** con 2 few-shots correctamente inyectados, documentado en `docs/prompts-decisiones.md` → IE2
+- **LLM-as-judge ejecutado** sobre 16 interacciones, documentado en `docs/judge-results.md` → IE6
+- **MCP server validado via HTTP** con `scripts/test_mcp_endpoint.py` (handshake + tools/list + tools/call funcionando)
+- Output del endpoint MCP guardado en `data/eval/mcp_endpoint_demo.json` como evidencia
+- **Informe técnico de 5 páginas** (`informe.pdf`) generado con `scripts/md_a_pdf.py` → IE5 + cubre IE1-IE4
 
 **Pendiente inmediato** (siguiente en el plan recortado):
-1. Generar 10+ interacciones reales + correr `judge.py` → IE6
-2. Conectar el MCP server a Claude Desktop → demo en vivo para defensa
-3. Informe de 5 páginas → IE5
-4. Slides en markdown (no PPT) → IE9
-5. Diagrama (al final según usuario) → IE4, IE7
+1. Slides en markdown (no PPT) → IE9
+2. Diagrama (al final según usuario) → IE4, IE7
 
 ---
 
@@ -209,6 +210,28 @@ Si dos opciones empatan, preguntar al usuario antes de avanzar.
 - **Confusión alerta vs no_cumple**: la definición original de `no_cumple` mezclaba "incumple" con "es vaga". **Resuelto** restringiendo `no_cumple` a solo DOS casos (ilegal explícita o vacía absoluta) y agregando few-shot de "necesito ayuda" como ejemplo.
 - **Batería de evaluación de prompts**: script `scripts/eval_prompts.py` con 8 casos representativos, scoring automático, guardado en `data/eval/v1/` y `data/eval/v2/`. **Resuelto** permitiendo medir el impacto de cada cambio de prompt con evidencia numérica.
 - **Documentación IE2**: `docs/prompts-decisiones.md` con análisis completo v1→v2, problemas detectados, cambios justificados, tabla comparativa, lecciones aprendidas y mejoras futuras.
+
+### Sesión 5 — LLM-as-judge ejecutado (IE6)
+
+- **Script de conversión eval→JSONL**: los outputs de `scripts/eval_prompts.py` no estaban en el formato que espera `src/agent/judge.py`. **Resuelto** creando `scripts/evaluar_con_judge.py` que convierte los 16 JSON a JSONL y los pasa al juez.
+- **Resultados cuantitativos**: el LLM-as-judge evaluó 16 interacciones con 3 métricas. v2 supera a v1 en relevancia (+20%) y completitud (+46%). Fundamentación se mantiene en 0.34, sugiriendo que es un área de mejora prioritaria (probablemente requiera validación post-procesamiento).
+- **Documentación IE6**: `docs/judge-results.md` con tabla comparativa, análisis de áreas de mejora, metodología, cómo reproducir y limitaciones del método.
+
+### Sesión 6 — MCP server validado por HTTP (preparación para demo en vivo)
+
+- **Middleware ASGI mal registrado**: en `src/mcp_server/server.py:build_app()` usaba `app.add_middleware(Middleware, dispatch=AuthMiddlewareASGI)` que no es la firma correcta de Starlette. Daba `TypeError: 'Middleware' object is not callable` y 500 Internal Server Error. **Resuelto** usando `app.add_middleware(AuthMiddlewareASGI)` directamente.
+- **Script de smoke test del endpoint MCP**: `scripts/test_mcp_endpoint.py` levanta el server en un thread, hace las 3 peticiones JSON-RPC (initialize, tools/list, tools/call) y guarda la salida real en `data/eval/mcp_endpoint_demo.json`. Sirve como demo de lo que haría Claude Desktop al conectarse, sin necesitar Claude Desktop instalado.
+- **Validación end-to-end del endpoint**: handshake MCP responde con `protocolVersion: 2024-11-05` y `serverInfo: {name: "agente-auditor-comunitario"}`. La tool `revisar_publicacion` se lista correctamente y devuelve el JSON esperado con citas a la Ley 21.442.
+- **Config de Claude Desktop listo**: `docs/claude_desktop_config.json` con la estructura correcta. Solo hay que copiar y pegar en `%APPDATA%\Claude\claude_desktop_config.json` cuando se instale.
+- **Limitación del entorno**: Claude Desktop no está instalado en este equipo, pero la validación HTTP confirma que el server está listo para cuando se conecte.
+
+### Sesión 7 — Informe técnico de 5 páginas (IE1-IE5)
+
+- **WeasyPrint requiere GTK en Windows**: la primera opción para PDF (weasyprint) no funcionó por dependencias nativas. **Resuelto** migrando a `fpdf2` (Python puro).
+- **fpdf2 + Helvetica no soporta Unicode**: la segunda opción con fuentes por defecto fallaba con caracteres como `—`, `°`, tildes. **Resuelto** descargando fuentes DejaVu (TTF, Unicode completas) y configurándolas con `add_font()`.
+- **Informe excedía 5 páginas (10 → 6)**: la primera versión con todo el contenido quedó en 10 páginas. **Resuelto** compactando: layout más denso (fuente 9pt, márgenes 1.5cm), eliminando diagramas ASCII redundantes, condensando tablas, acortando subsecciones.
+- **Generador de PDF custom**: `scripts/md_a_pdf.py` parsea markdown simple y genera PDF con fpdf2 + DejaVu. Mantenido simple a propósito (no usa weasyprint por dependencias nativas complicadas en Windows).
+- **Informe final**: 5 páginas exactas en A4, con secciones IE1-IE5 + reflexión individual + referencias APA.
 
 ---
 

@@ -54,7 +54,7 @@ mcp = _build_server()
 
 def build_app():
     """Devuelve una app ASGI lista para uvicorn, con middleware de auth."""
-    from starlette.middleware import Middleware
+    from starlette.responses import JSONResponse
     from starlette.types import ASGIApp, Receive, Scope, Send
 
     app = mcp.streamable_http_app()
@@ -68,8 +68,6 @@ def build_app():
             if scope["type"] != "http":
                 await self.app(scope, receive, send)
                 return
-            from starlette.responses import JSONResponse
-
             headers = {k.decode().lower(): v.decode() for k, v in scope.get("headers", [])}
             ok, motivo = auth.validar(headers)
             if not ok:
@@ -78,7 +76,7 @@ def build_app():
                 return
             await self.app(scope, receive, send)
 
-    app.add_middleware(Middleware, dispatch=AuthMiddlewareASGI)  # type: ignore[arg-type]
+    app.add_middleware(AuthMiddlewareASGI)
     return app
 
 

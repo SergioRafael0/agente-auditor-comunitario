@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "aac": {
+      "url": "http://localhost:8000/mcp",
+      "headers": {
+        "Authorization": "Bearer CAMBIA_ESTO_POR_TU_MCP_AUTH_TOKEN"
+      }
+    }
+  }
+}

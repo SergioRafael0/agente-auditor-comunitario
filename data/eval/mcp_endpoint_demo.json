@@ -1,0 +1,45 @@
+{
+  "interaccion_id": "d512cfc9-187c-40e8-9307-4bd6ee48909c",
+  "estado": "alerta",
+  "alertas": [
+    {
+      "fuente": "Ley 21.442",
+      "articulo": "Párrafo 3",
+      "mensaje": "Las alteraciones o reparaciones de ascensores deben ser ejecutadas por empresas o personas inscritas en el Registro de Instaladores, Mantenedores y Certificadores del Ministerio de Vivienda y Urbanismo y contar con el acuerdo de la asamblea de copropietarios y, cuando proceda, el permiso de la dirección de obras municipales.",
+      "recomendacion": "Obtener la autorización de la asamblea de copropietarios, contratar a un mantenedor certificado en el registro mencionado y gestionar el permiso municipal antes de iniciar la reparación."
+    }
+  ],
+  "recomendaciones_generales": [
+    "Solicitar al menos dos cotizaciones de empresas certificadas para la reparación del ascensor.",
+    "Verificar que el contratista esté inscrito y activo en el Registro de Instaladores, Mantenedores y Certificadores del Ministerio de Vivienda y Urbanismo.",
+    "Conservar toda la documentación (actas de asamblea, permisos municipales, certificaciones) como evidencia de cumplimiento normativo."
+  ],
+  "fragmentos_recuperados": [
+    {
+      "fuente": "sec_ric_02_tableros",
+      "articulo": "Punto 6.3",
+      "score": 0.46974676847457886
+    },
+    {
+      "fuente": "ley_21442",
+      "articulo": "Párrafo 3",
+      "score": 0.45674365758895874
+    },
+    {
+      "fuente": "sec_ric_03_alimentadores",
+      "articulo": "Punto 03",
+      "score": 0.4087545871734619
+    },
+    {
+      "fuente": "sec_ric_01_empalmes",
+      "articulo": "Punto 01",
+      "score": 0.4060136675834656
+    },
+    {
+      "fuente": "sec_ric_01_empalmes",
+      "articulo": "Punto 7.6",
+      "score": 0.3999508023262024
+    }
+  ],
+  "latencia_ms": 9335
+}

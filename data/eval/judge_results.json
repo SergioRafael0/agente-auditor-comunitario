@@ -1,0 +1,204 @@
+{
+  "total_evaluaciones": 16,
+  "promedios_globales": {
+    "relevancia_chunks": 0.469,
+    "fundamentacion": 0.338,
+    "completitud": 0.4
+  },
+  "promedios_por_version": {
+    "v1": {
+      "n": 8,
+      "promedios": {
+        "relevancia_chunks": 0.425,
+        "fundamentacion": 0.338,
+        "completitud": 0.325
+      }
+    },
+    "v2": {
+      "n": 8,
+      "promedios": {
+        "relevancia_chunks": 0.512,
+        "fundamentacion": 0.338,
+        "completitud": 0.475
+      }
+    }
+  },
+  "resultados_individuales": [
+    {
+      "interaccion_id": "debd6931-06e0-48d7-a312-cacba2f47234",
+      "version_prompt": "v1",
+      "categoria": "ascensor",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.6,
+        "fundamentacion": 0.9,
+        "completitud": 0.6
+      }
+    },
+    {
+      "interaccion_id": "348796d0-aa08-44ec-9ef8-611ffa0147f0",
+      "version_prompt": "v1",
+      "categoria": "electricidad",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.6,
+        "fundamentacion": 0.3,
+        "completitud": 0.4
+      }
+    },
+    {
+      "interaccion_id": "264912c0-bfb8-4d7b-95aa-f7d59c046a20",
+      "version_prompt": "v1",
+      "categoria": "electricidad",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.8,
+        "fundamentacion": 0.3,
+        "completitud": 0.3
+      }
+    },
+    {
+      "interaccion_id": "de85c136-b9c9-47d5-8cde-070d08cd6402",
+      "version_prompt": "v1",
+      "categoria": "agua",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.1,
+        "fundamentacion": 0.2,
+        "completitud": 0.4
+      }
+    },
+    {
+      "interaccion_id": "493a5b30-7e6a-47c9-b7b0-d795730f9084",
+      "version_prompt": "v1",
+      "categoria": "gas",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.0,
+        "fundamentacion": 0.0,
+        "completitud": 0.0
+      }
+    },
+    {
+      "interaccion_id": "e5d68a47-d3ac-43dc-b2fc-feb68c53c77e",
+      "version_prompt": "v1",
+      "categoria": "general",
+      "estado_agente": "cumple",
+      "scores": {
+        "relevancia_chunks": 0.4,
+        "fundamentacion": 0.0,
+        "completitud": 0.2
+      }
+    },
+    {
+      "interaccion_id": "6c99efd4-b1b7-4f9b-8152-ab5f942275e4",
+      "version_prompt": "v1",
+      "categoria": "general",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.6,
+        "fundamentacion": 0.9,
+        "completitud": 0.5
+      }
+    },
+    {
+      "interaccion_id": "66bf939b-5a56-4762-8132-10828e6bc72f",
+      "version_prompt": "v1",
+      "categoria": "general",
+      "estado_agente": "no_cumple",
+      "scores": {
+        "relevancia_chunks": 0.3,
+        "fundamentacion": 0.1,
+        "completitud": 0.2
+      }
+    },
+    {
+      "interaccion_id": "e0431902-cf35-4bb1-80b9-6a2da80aaf48",
+      "version_prompt": "v2",
+      "categoria": "ascensor",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.8,
+        "fundamentacion": 1.0,
+        "completitud": 0.6
+      }
+    },
+    {
+      "interaccion_id": "b2c1f331-1292-4da8-a3b8-256557a44611",
+      "version_prompt": "v2",
+      "categoria": "electricidad",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.8,
+        "fundamentacion": 0.3,
+        "completitud": 0.4
+      }
+    },
+    {
+      "interaccion_id": "971b42a9-53d6-4b1b-8ee4-db90c68cd31a",
+      "version_prompt": "v2",
+      "categoria": "electricidad",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.8,
+        "fundamentacion": 0.2,
+        "completitud": 0.4
+      }
+    },
+    {
+      "interaccion_id": "f1271def-5eb0-4f40-8616-bc9b9c201f26",
+      "version_prompt": "v2",
+      "categoria": "agua",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.2,
+        "fundamentacion": 0.3,
+        "completitud": 0.2
+      }
+    },
+    {
+      "interaccion_id": "e924c037-610c-42f3-aa74-8e63ff469a1c",
+      "version_prompt": "v2",
+      "categoria": "gas",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.0,
+        "fundamentacion": 0.0,
+        "completitud": 0.2
+      }
+    },
+    {
+      "interaccion_id": "7038b3a1-c9f1-41b4-8739-0c5e8c055149",
+      "version_prompt": "v2",
+      "categoria": "general",
+      "estado_agente": "cumple",
+      "scores": {
+        "relevancia_chunks": 0.6,
+        "fundamentacion": 0.0,
+        "completitud": 0.2
+      }
+    },
+    {
+      "interaccion_id": "b6915747-cc5c-4e4b-8945-e6d07c5156db",
+      "version_prompt": "v2",
+      "categoria": "general",
+      "estado_agente": "alerta",
+      "scores": {
+        "relevancia_chunks": 0.6,
+        "fundamentacion": 0.9,
+        "completitud": 0.8
+      }
+    },
+    {
+      "interaccion_id": "2720a4a4-7f15-4d91-a6fb-7c83f3a55775",
+      "version_prompt": "v2",
+      "categoria": "general",
+      "estado_agente": "no_cumple",
+      "scores": {
+        "relevancia_chunks": 0.3,
+        "fundamentacion": 0.0,
+        "completitud": 1.0
+      }
+    }
+  ]
+}
