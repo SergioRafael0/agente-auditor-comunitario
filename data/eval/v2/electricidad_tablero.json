@@ -1,0 +1,72 @@
+{
+  "caso": {
+    "id": "electricidad_tablero",
+    "texto": "Necesito instalar un nuevo tablero electrico en el edificio",
+    "categoria": "electricidad",
+    "esperado": [
+      "alerta"
+    ],
+    "motivo": "Tableros electricos requieren instalador certificado SEC y RIC N°02"
+  },
+  "output": {
+    "interaccion_id": "971b42a9-53d6-4b1b-8ee4-db90c68cd31a",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.2.1-6.2.2",
+        "mensaje": "El cableado interno del tablero debe dimensionarse según las tablas del RIC N°04 y protegerse contra sobrecarga y cortocircuito.",
+        "recomendacion": "Contratar a un instalador eléctrico certificado que elabore el cálculo de carga y presente la Declaración de Instalación Eléctrica (TE1) con los planos de dimensionado."
+      },
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.4.1",
+        "mensaje": "Todo tablero debe contar con una conexión a tierra conforme al Pliego Técnico Normativo RIC N°06.",
+        "recomendacion": "Verificar que el instalador realice la puesta a tierra y entregue certificado de continuidad de puesta a tierra."
+      },
+      {
+        "fuente": "RIC N°01",
+        "articulo": "Punto 7.12.3",
+        "mensaje": "El alimentador principal del tablero debe contar con protección contra sobrecargas y cortocircuitos ubicada en el primer recinto de empalmes.",
+        "recomendacion": "Incluir en el proyecto la protección principal (disyuntor) y su ubicación conforme al pliego."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Solicitar al menos dos cotizaciones de empresas instaladoras con certificación SEC.",
+      "Exigir la presentación del plano de instalación y la certificación de cumplimiento de normas IEC 61439.",
+      "Programar inspección posterior a la obra por un técnico autorizado para validar la conformidad."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 7.6",
+        "score": 0.5899905562400818
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 02",
+        "score": 0.5897882580757141
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "",
+        "score": 0.5812283158302307
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.1.1",
+        "score": 0.5434672832489014
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.5429742336273193
+      }
+    ],
+    "latencia_ms": 21173
+  },
+  "latencia_ms": 21173,
+  "estado_real": "alerta",
+  "n_alertas": 3,
+  "score": 1
+}

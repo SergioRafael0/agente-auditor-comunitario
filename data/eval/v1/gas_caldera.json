@@ -1,0 +1,60 @@
+{
+  "caso": {
+    "id": "gas_caldera",
+    "texto": "La caldera a gas del edificio no calienta bien. Necesito tecnico.",
+    "categoria": "gas",
+    "esperado": [
+      "alerta"
+    ],
+    "motivo": "Trabajos en gas requieren tecnico gasista certificado SEC"
+  },
+  "output": {
+    "interaccion_id": "493a5b30-7e6a-47c9-b7b0-d795730f9084",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Artículo 5",
+        "mensaje": "El mantenimiento y reparación de calderas a gas en edificios debe ser ejecutado por un técnico instalador autorizado por la Superintendencia de Seguridad del Estado y, en la mayoría de los casos, requiere la autorización de la asamblea de copropietarios.",
+        "recomendacion": "Contratar a un técnico certificado en instalaciones de gas, solicitar su certificado de habilitación y presentar a la asamblea el informe técnico y la autorización correspondiente antes de iniciar la reparación."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Solicitar al menos dos cotizaciones de empresas con habilitación de la SEC para trabajos de gas.",
+      "Exigir al técnico la entrega de informe de inspección y certificación de la caldera una vez finalizada la reparación.",
+      "Programar mantenimientos preventivos periódicos de la caldera según lo establecido en el manual del fabricante y la normativa vigente."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.4841231107711792
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.48374849557876587
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.4609842896461487
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "Punto 06",
+        "score": 0.4512619972229004
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "Punto 06",
+        "score": 0.44668877124786377
+      }
+    ],
+    "latencia_ms": 39338
+  },
+  "latencia_ms": 39338,
+  "estado_real": "alerta",
+  "n_alertas": 1,
+  "score": 1
+}

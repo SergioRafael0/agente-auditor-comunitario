@@ -1,0 +1,73 @@
+{
+  "caso": {
+    "id": "electricidad_tablero",
+    "texto": "Necesito instalar un nuevo tablero electrico en el edificio",
+    "categoria": "electricidad",
+    "esperado": [
+      "alerta"
+    ],
+    "motivo": "Tableros electricos requieren instalador certificado SEC y RIC N°02"
+  },
+  "output": {
+    "interaccion_id": "264912c0-bfb8-4d7b-95aa-f7d59c046a20",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.2.1",
+        "mensaje": "La instalación de un nuevo tablero eléctrico debe cumplir con los requisitos de dimensionamiento, protección contra sobrecarga y cortocircuito, y conexión a tierra establecidos en el Pliego Técnico Normativo RIC N°02.",
+        "recomendacion": "Contratar a un instalador eléctrico certificado por la SEC y exigir la presentación de la Declaración de Instalación Eléctrica (TE1) que certifique cumplimiento de los puntos 6.2.1 a 6.4 del RIC N°02."
+      },
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.3.1",
+        "mensaje": "Los conductores de alimentación deben llegar al dispositivo de maniobra antes de la protección, garantizando la desconexión total en caso de falla.",
+        "recomendacion": "Verificar que el diseño del tablero incluya la secuencia de conexión indicada y que el instalador firme el plano de conexión."
+      },
+      {
+        "fuente": "RIC N°01",
+        "articulo": "Punto 7.12.1",
+        "mensaje": "La canalización de la alimentación principal al nuevo tablero debe usar ductos cerrados retardantes de llama y cumplir con los requisitos de materiales no halógenos según el RIC N°01.",
+        "recomendacion": "Asegurar que la empresa ejecutora utilice los ductos y materiales especificados y que se realice la inspección de la canalización antes de energizar."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Solicitar al menos dos cotizaciones de instaladores eléctricos certificados por la SEC.",
+      "Verificar que el tablero cumpla con la norma IEC 61439 (ensamblaje y pruebas).",
+      "Obtener la autorización de la asamblea de copropietarios si la obra implica modificaciones estructurales o aumento de capacidad superior a 100 A, conforme a la Ley 21.442.",
+      "Conservar toda la documentación (planos, certificaciones, pruebas de rutina) para futuros mantenimientos y auditorías."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 7.6",
+        "score": 0.5899905562400818
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 02",
+        "score": 0.5897882580757141
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "",
+        "score": 0.5812283158302307
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.1.1",
+        "score": 0.5434672832489014
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.5429742336273193
+      }
+    ],
+    "latencia_ms": 42006
+  },
+  "latencia_ms": 42010,
+  "estado_real": "alerta",
+  "n_alertas": 3,
+  "score": 1
+}

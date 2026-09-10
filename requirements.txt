@@ -1,0 +1,29 @@
+# LLM (Groq, API compatible con SDK openai) — src/agent/llm.py
+groq>=0.11.0
+
+# Embeddings locales — src/indexer/embed.py
+sentence-transformers>=3.0
+
+# Vector DB local persistente — src/retriever/search.py
+chromadb>=0.5.0
+
+# PDF parsing (texto legal) — src/indexer/ingest.py
+pymupdf4llm>=0.0.17
+pypdf>=5.0
+
+# MCP server — src/mcp_server/server.py
+# Fijado a 1.x: la 2.x cambio la API (sin streamable_http_app helper).
+mcp[cli]>=1.2.0,<2.0
+uvicorn>=0.30
+starlette>=0.37
+
+# Config
+python-dotenv>=1.0
+
+# Utilidades
+pydantic>=2.0
+
+# Tests
+pytest>=8.0
+pytest-cov>=4.0
+pytest-asyncio>=0.23

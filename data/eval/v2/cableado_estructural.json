@@ -1,0 +1,74 @@
+{
+  "caso": {
+    "id": "cableado_estructural",
+    "texto": "Necesito recablear todo el sistema electrico del edificio de 10 pisos porque tiene mas de 30 anos",
+    "categoria": "electricidad",
+    "esperado": [
+      "alerta",
+      "no_cumple"
+    ],
+    "motivo": "Obra mayor electrica, requiere proyecto SEC, instalador certificado, RIC N°01 a N°06"
+  },
+  "output": {
+    "interaccion_id": "b2c1f331-1292-4da8-a3b8-256557a44611",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.2.2",
+        "mensaje": "El cableado interno del tablero debe dimensionarse según las tablas de capacidad de corriente del RIC N°04 y quedar protegido contra sobrecarga y cortocircuito.",
+        "recomendacion": "Contratar a un instalador eléctrico certificado que elabore el proyecto de recableado conforme a RIC N°02 y RIC N°04, y presente la declaración de instalación eléctrica (TE1) al concluir los trabajos."
+      },
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.10.2",
+        "mensaje": "Las verificaciones de diseño y pruebas de rutina para tableros de entre 100 A y 1500 A deben realizarse según el anexo 2.3 del pliego técnico.",
+        "recomendacion": "Programar inspección y pruebas de rutina por el fabricante o entidad acreditada antes de poner en servicio el nuevo cableado."
+      },
+      {
+        "fuente": "RIC N°01",
+        "articulo": "Punto 7.8.1‑7.8.4",
+        "mensaje": "Los recintos destinados al montaje de cajas de empalmes concentrados deben ubicarse en planta baja o entresuelo, cumplir con requisitos de no combustibilidad, accesibilidad y separación de otros servicios.",
+        "recomendacion": "Diseñar y habilitar un recinto de empalmes que cumpla con estos requisitos y obtener la autorización correspondiente antes de iniciar el recableado."
+      }
+    ],
+    "recomendaciones_generales": [
+      "El proyecto de recableado debe ser elaborado por un ingeniero electricista y aprobado por la Superintendencia de Electricidad y Combustibles (SEC).",
+      "Solicitar al menos tres cotizaciones de empresas instaladoras con certificación SEC y verificar que sus instaladores estén habilitados por la SEC.",
+      "Asegurar que todos los materiales y equipos cumplan con las normas IEC aplicables (IEC 61439, IEC 60417, etc.).",
+      "Programar inspección final y certificación de puesta en marcha antes de la entrega al condominio."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.5415148735046387
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 02",
+        "score": 0.5273520350456238
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "",
+        "score": 0.472980260848999
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.4719661474227905
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 13.2.1",
+        "score": 0.46685218811035156
+      }
+    ],
+    "latencia_ms": 37888
+  },
+  "latencia_ms": 37888,
+  "estado_real": "alerta",
+  "n_alertas": 3,
+  "score": 1
+}

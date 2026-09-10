@@ -1,0 +1,60 @@
+{
+  "caso": {
+    "id": "gas_caldera",
+    "texto": "La caldera a gas del edificio no calienta bien. Necesito tecnico.",
+    "categoria": "gas",
+    "esperado": [
+      "alerta"
+    ],
+    "motivo": "Trabajos en gas requieren tecnico gasista certificado SEC"
+  },
+  "output": {
+    "interaccion_id": "e924c037-610c-42f3-aa74-8e63ff469a1c",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Artículo 2",
+        "mensaje": "La reparación o ajuste de una caldera a gas debe ser ejecutada por personal técnico certificado y autorizado por la Superintendencia de Seguridad de Gas.",
+        "recomendacion": "Contratar a un instalador o técnico de gas certificado y exigir la entrega del certificado de conformidad tras la intervención."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Programar mantenimientos preventivos periódicos de la caldera según fabricante.",
+      "Solicitar inspección de la instalación de gas por parte de la autoridad competente antes de cualquier reparación.",
+      "Conservar la documentación de certificados y mantenimientos para futuras auditorías."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.4841231107711792
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.48374849557876587
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.4609842896461487
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "Punto 06",
+        "score": 0.4512619972229004
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "Punto 06",
+        "score": 0.44668877124786377
+      }
+    ],
+    "latencia_ms": 30520
+  },
+  "latencia_ms": 30520,
+  "estado_real": "alerta",
+  "n_alertas": 1,
+  "score": 1
+}

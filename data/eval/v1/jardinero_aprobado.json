@@ -1,0 +1,52 @@
+{
+  "caso": {
+    "id": "jardinero_aprobado",
+    "texto": "Busco jardinero para poda de arbustos en areas verdes comunes del condominio. El jardinero ya fue aprobado por la asamblea en sesion del mes pasado.",
+    "categoria": "general",
+    "esperado": [
+      "cumple"
+    ],
+    "motivo": "Ya aprobado por asamblea, sin alertas regulatorias"
+  },
+  "output": {
+    "interaccion_id": "e5d68a47-d3ac-43dc-b2fc-feb68c53c77e",
+    "estado": "cumple",
+    "alertas": [],
+    "recomendaciones_generales": [
+      "Verificar que el contrato del jardinero incluya cláusulas de cumplimiento de normas de seguridad y medio ambiente.",
+      "Mantener registro del acta de la asamblea que aprobó al jardinero para futuras auditorías."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 64",
+        "score": 0.3721766471862793
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 55",
+        "score": 0.3600996136665344
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 9",
+        "score": 0.3590710163116455
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 81",
+        "score": 0.35714930295944214
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 90",
+        "score": 0.3556458353996277
+      }
+    ],
+    "latencia_ms": 22930
+  },
+  "latencia_ms": 22930,
+  "estado_real": "cumple",
+  "n_alertas": 0,
+  "score": 1
+}

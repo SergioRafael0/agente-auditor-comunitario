@@ -1,0 +1,81 @@
+{
+  "caso": {
+    "id": "cableado_estructural",
+    "texto": "Necesito recablear todo el sistema electrico del edificio de 10 pisos porque tiene mas de 30 anos",
+    "categoria": "electricidad",
+    "esperado": [
+      "alerta",
+      "no_cumple"
+    ],
+    "motivo": "Obra mayor electrica, requiere proyecto SEC, instalador certificado, RIC N°01 a N°06"
+  },
+  "output": {
+    "interaccion_id": "348796d0-aa08-44ec-9ef8-611ffa0147f0",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.2.2",
+        "mensaje": "El cableado interno debe dimensionarse según las tablas del RIC N°04 y protegerse contra sobrecarga y cortocircuito.",
+        "recomendacion": "Contratar a un instalador eléctrico certificado por la SEC y exigir el cálculo de sección de conductores y la presentación de la declaración de cumplimiento (TE1)."
+      },
+      {
+        "fuente": "RIC N°02",
+        "articulo": "Punto 6.10.2",
+        "mensaje": "Las verificaciones de diseño y pruebas de rutina de tableros de 100 A a 1500 A deben realizarse conforme al anexo 2.3 del pliego.",
+        "recomendacion": "Solicitar al fabricante o a un laboratorio acreditado la realización de pruebas de rutina y obtener el certificado de conformidad antes de la puesta en servicio."
+      },
+      {
+        "fuente": "RIC N°01",
+        "articulo": "Punto 7.8.1‑7.8.4",
+        "mensaje": "Los recintos de empalmes concentrados deben ubicarse en planta baja o entresuelo, en espacios no combustibles y con dimensiones mínimas específicas.",
+        "recomendacion": "Verificar que el edificio cuente con el recinto de empalmes conforme a estos requisitos o crear uno nuevo antes de iniciar el recableado."
+      },
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Artículo 31",
+        "mensaje": "Las obras mayores que impliquen modificaciones estructurales o de instalaciones comunes requieren autorización de la asamblea de copropietarios.",
+        "recomendacion": "Presentar proyecto técnico a la asamblea, obtener la aprobación formal mediante acta y registrar la resolución en el libro de actas del condominio."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Elaborar un proyecto eléctrico firmado por un ingeniero electricista colegiado.",
+      "Obtener la autorización de la empresa distribuidora de energía para la ejecución y posterior inspección.",
+      "Garantizar la continuidad de la puesta a tierra del edificio según RIC N°05 y DS N°109/2017.",
+      "Programar la ejecución en fases para no interrumpir el suministro a los residentes.",
+      "Conservar toda la documentación (cálculos, certificaciones, actas) para futuras auditorías."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.5415148735046387
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 02",
+        "score": 0.5273520350456238
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "",
+        "score": 0.472980260848999
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.4719661474227905
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 13.2.1",
+        "score": 0.46685218811035156
+      }
+    ],
+    "latencia_ms": 32151
+  },
+  "latencia_ms": 32151,
+  "estado_real": "alerta",
+  "n_alertas": 4,
+  "score": 1
+}

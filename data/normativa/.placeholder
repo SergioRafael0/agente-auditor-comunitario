@@ -1,0 +1,8 @@
+# Carpeta para textos legales fuente (txt/pdf)
+# Archivos esperados:
+# - ley_21442.txt   (Ley de Copropiedad Inmobiliaria)
+# - sec_ascensores.txt  (Normativa SEC ascensores)
+# - sec_electricidad.txt  (Normativa SEC instalaciones eléctricas)
+#
+# Mantener estos archivos actualizados y commiteados (son la fuente del RAG).
+# El resto de data/ está en .gitignore.

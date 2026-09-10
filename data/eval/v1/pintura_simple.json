@@ -1,0 +1,60 @@
+{
+  "caso": {
+    "id": "pintura_simple",
+    "texto": "Necesito pintar el hall del edificio, color blanco, sin urgencia.",
+    "categoria": "general",
+    "esperado": [
+      "alerta"
+    ],
+    "motivo": "Obras en areas comunes requieren aprobacion de asamblea (Ley 21.442)"
+  },
+  "output": {
+    "interaccion_id": "6c99efd4-b1b7-4f9b-8152-ab5f942275e4",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Artículo 56",
+        "mensaje": "Cualquier obra o modificación en áreas comunes, como pintar el hall, debe contar con la autorización de la asamblea de copropietarios y cumplir con el plan regulador y normas de construcción aplicables.",
+        "recomendacion": "Solicitar y registrar la aprobación de la asamblea en acta, y, si corresponde, obtener permiso municipal de obra menor antes de iniciar la pintura."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Contratar una empresa pintora con experiencia en edificios y que utilice pinturas certificadas de bajo contenido de VOC.",
+      "Solicitar al menos dos cotizaciones y comparar precios y garantías.",
+      "Asegurar la correcta ventilación del área durante y después de la aplicación de la pintura."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.36974143981933594
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "Punto 06",
+        "score": 0.3610570430755615
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 59",
+        "score": 0.3483297824859619
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 56",
+        "score": 0.3343645930290222
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 136",
+        "score": 0.3290829658508301
+      }
+    ],
+    "latencia_ms": 26644
+  },
+  "latencia_ms": 26644,
+  "estado_real": "alerta",
+  "n_alertas": 1,
+  "score": 1
+}

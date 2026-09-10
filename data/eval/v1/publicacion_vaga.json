@@ -1,0 +1,56 @@
+{
+  "caso": {
+    "id": "publicacion_vaga",
+    "texto": "Necesito ayuda con unas cosas del edificio",
+    "categoria": "general",
+    "esperado": [
+      "no_cumple"
+    ],
+    "motivo": "Publicacion sin categoria ni detalle suficiente"
+  },
+  "output": {
+    "interaccion_id": "66bf939b-5a56-4762-8132-10828e6bc72f",
+    "estado": "no_cumple",
+    "alertas": [
+      {
+        "fuente": "Plataforma Proveedores & Comunidades",
+        "articulo": "Buenas prácticas de publicación",
+        "mensaje": "La publicación no contiene información suficiente para identificar el tipo de trabajo requerido ni la categoría correspondiente.",
+        "recomendacion": "Solicitar al administrador que publique nuevamente con: (1) categoría específica, (2) descripción detallada del problema, (3) nivel de urgencia."
+      }
+    ],
+    "recomendaciones_generales": [],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 7.6",
+        "score": 0.4800090789794922
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.46639084815979004
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 78",
+        "score": 0.4654105305671692
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Título II",
+        "score": 0.46424221992492676
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 61",
+        "score": 0.45271432399749756
+      }
+    ],
+    "latencia_ms": 24501
+  },
+  "latencia_ms": 24501,
+  "estado_real": "no_cumple",
+  "n_alertas": 1,
+  "score": 1
+}

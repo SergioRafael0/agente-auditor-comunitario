@@ -1,0 +1,61 @@
+{
+  "caso": {
+    "id": "filtracion_bano",
+    "texto": "Hay una filtracion en el bano del primer piso. Necesito un gasfiter.",
+    "categoria": "agua",
+    "esperado": [
+      "cumple",
+      "alerta"
+    ],
+    "motivo": "Trabajo sanitario menor, deberia cumplir o dar alerta leve"
+  },
+  "output": {
+    "interaccion_id": "f1271def-5eb0-4f40-8616-bc9b9c201f26",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Artículo 1",
+        "mensaje": "Las obras que alteren instalaciones de agua o gas en bienes comunes o unidades deben ser ejecutadas por persona o entidad autorizada por la Superintendencia de Electricidad y Combustibles y contar con el acuerdo de la asamblea de copropietarios.",
+        "recomendacion": "Contratar a un instalador de plomería certificado por la SEC y obtener la autorización de la asamblea de copropietarios; si corresponde, solicitar permiso de la Dirección de Obras Municipales."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Verificar que el profesional esté inscrito en el Registro de Instaladores, Mantenedores y Certificadores del MINVU.",
+      "Solicitar al menos dos cotizaciones de instaladores certificados.",
+      "Coordinar con la administración del edificio para programar el corte de suministro de agua y, de ser necesario, de gas durante la reparación."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "ley_21442",
+        "articulo": "",
+        "score": 0.46052229404449463
+      },
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.43916547298431396
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.43354862928390503
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.43308025598526
+      },
+      {
+        "fuente": "sec_ric_05_proteccion",
+        "articulo": "Punto 05",
+        "score": 0.4190366268157959
+      }
+    ],
+    "latencia_ms": 38695
+  },
+  "latencia_ms": 38695,
+  "estado_real": "alerta",
+  "n_alertas": 1,
+  "score": 1
+}

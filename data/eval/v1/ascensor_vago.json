@@ -1,0 +1,61 @@
+{
+  "caso": {
+    "id": "ascensor_vago",
+    "texto": "Necesito arreglar el ascensor del edificio que hace ruidos raros al subir. Es urgente.",
+    "categoria": "ascensor",
+    "esperado": [
+      "alerta",
+      "no_cumple"
+    ],
+    "motivo": "Debe mencionar Registro de Mantenedores SEC/MINVU y autorizacion de asamblea"
+  },
+  "output": {
+    "interaccion_id": "debd6931-06e0-48d7-a312-cacba2f47234",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Párrafo 3",
+        "mensaje": "Las alteraciones o reparaciones de ascensores deben ser realizadas por empresas o personas inscritas en el Registro de Instaladores, Mantenedores y Certificadores del Ministerio de Vivienda y Urbanismo y contar con el acuerdo de la asamblea de copropietarios y, cuando proceda, con permiso de la Dirección de Obras Municipales.",
+        "recomendacion": "Obtener la autorización de la asamblea de copropietarios, contratar a un mantenedor certificado en el registro y, si corresponde, solicitar el permiso municipal antes de iniciar la reparación."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Solicitar al menos dos cotizaciones de empresas certificadas en mantenimiento de ascensores.",
+      "Verificar que el contratista esté inscrito y activo en el Registro de Instaladores, Mantenedores y Certificadores del Ministerio de Vivienda y Urbanismo.",
+      "Conservar la documentación de la autorización de la asamblea y del permiso municipal para futuros auditorías."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_02_tableros",
+        "articulo": "Punto 6.3",
+        "score": 0.4744299650192261
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Párrafo 3",
+        "score": 0.4485640525817871
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 7.6",
+        "score": 0.4092165231704712
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.40267395973205566
+      },
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.3986600637435913
+      }
+    ],
+    "latencia_ms": 12299
+  },
+  "latencia_ms": 12301,
+  "estado_real": "alerta",
+  "n_alertas": 1,
+  "score": 1
+}

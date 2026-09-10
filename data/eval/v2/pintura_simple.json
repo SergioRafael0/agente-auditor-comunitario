@@ -1,0 +1,59 @@
+{
+  "caso": {
+    "id": "pintura_simple",
+    "texto": "Necesito pintar el hall del edificio, color blanco, sin urgencia.",
+    "categoria": "general",
+    "esperado": [
+      "alerta"
+    ],
+    "motivo": "Obras en areas comunes requieren aprobacion de asamblea (Ley 21.442)"
+  },
+  "output": {
+    "interaccion_id": "b6915747-cc5c-4e4b-8945-e6d07c5156db",
+    "estado": "alerta",
+    "alertas": [
+      {
+        "fuente": "Ley 21.442",
+        "articulo": "Artículo 59",
+        "mensaje": "Las obras en bienes comunes, aunque de mantenimiento como pintura, deben contar con la autorización de la asamblea de copropietarios y no pueden afectar la seguridad del conjunto.",
+        "recomendacion": "Solicitar y obtener la aprobación de la asamblea de copropietarios mediante resolución escrita antes de iniciar la pintura del hall."
+      }
+    ],
+    "recomendaciones_generales": [
+      "Verificar que el contratista cumpla con la normativa de seguridad laboral (DS N°594).",
+      "Conservar evidencia documental de la autorización y del contrato de obra."
+    ],
+    "fragmentos_recuperados": [
+      {
+        "fuente": "sec_ric_01_empalmes",
+        "articulo": "Punto 01",
+        "score": 0.36974143981933594
+      },
+      {
+        "fuente": "sec_ric_06_puesta_tierra",
+        "articulo": "Punto 06",
+        "score": 0.3610570430755615
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 59",
+        "score": 0.3483297824859619
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 56",
+        "score": 0.3343645930290222
+      },
+      {
+        "fuente": "ley_21442",
+        "articulo": "Artículo 136",
+        "score": 0.3290829658508301
+      }
+    ],
+    "latencia_ms": 37595
+  },
+  "latencia_ms": 37595,
+  "estado_real": "alerta",
+  "n_alertas": 1,
+  "score": 1
+}
