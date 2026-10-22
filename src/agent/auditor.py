@@ -125,7 +125,19 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Probar el agente auditor desde CLI.")
     parser.add_argument("--texto", required=True, help="Descripcion de la publicacion")
     parser.add_argument("--categoria", default="general", help="Categoria (electricidad, ascensor, gas, agua, general)")
+    parser.add_argument(
+        "--demo",
+        action="store_true",
+        help="Modo demostracion: responde sin API key (LLM simulado)",
+    )
     args = parser.parse_args()
 
+    from src.agent.llm import activar_modo_demo, se_uso_demo
+
+    if args.demo:
+        activar_modo_demo()
+
     resultado = auditar_publicacion(args.texto, args.categoria)
+    if se_uso_demo():
+        print("*** MODO DEMO: sin API key, respuestas del LLM simuladas ***")
     print(json.dumps(resultado, indent=2, ensure_ascii=False))

@@ -15,26 +15,10 @@ dist/
 *.egg-info/
 *.egg
 
-# Variables de entorno (NUNCA commitear)
+# Variables de entorno
 .env
 .env.local
 .env.*.local
-
-# Rastros del flujo de trabajo con IA (ver AGENTS.md §11)
-AGENTS.md
-plan.md
-
-# Material de estudio o preparación personal
-docs/guia-aprendizaje.md
-
-# Informes y entregables academicos (se entregan por AVA/correo, no al repo)
-informe.md
-informe.pdf
-*.docx
-
-# Artefactos generados por scripts (regenerables)
-data/judge_input.jsonl
-data/**/_resumen.json
 
 # Datos generados (se regeneran corriendo el indexer)
 data/chroma/
@@ -59,6 +43,9 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+# Bloqueos temporales de Office
+~$*
 
 # Logs
 *.log

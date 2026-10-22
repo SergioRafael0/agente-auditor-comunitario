@@ -22,10 +22,23 @@ def main() -> None:
     parser.add_argument("--texto", required=True, help="Texto de la publicacion o consulta normativa")
     parser.add_argument("--categoria", default="general", help="electricidad | ascensor | gas | agua | general")
     parser.add_argument("--thread-id", default="cli", help="Id de conversacion (memoria de corto plazo)")
+    parser.add_argument(
+        "--demo",
+        action="store_true",
+        help="Modo demostracion: responde sin API key (LLM simulado)",
+    )
     args = parser.parse_args()
+
+    from src.agent.llm import activar_modo_demo, se_uso_demo
+
+    if args.demo:
+        activar_modo_demo()
 
     estado = invocar_agente(args.texto, args.categoria, thread_id=args.thread_id)
 
+    if se_uso_demo():
+        print("*** MODO DEMO: sin API key, respuestas del LLM simuladas ***")
+        print()
     print(estado.get("respuesta_final") or "(sin respuesta)")
     print("\n--- Bitacora de decisiones del agente ---")
     for i, b in enumerate(estado.get("bitacora", []), 1):
