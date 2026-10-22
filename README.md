@@ -144,24 +144,20 @@ pytest --cov=src
 
 ## Jupyter / VS Code (recomendado para experimentar)
 
+La forma más fácil de probar el agente es abrir **`demo.ipynb`** y darle Run a las celdas: trae 7 ejemplos resueltos (auditoría normal, publicación vaga, consulta normativa, memoria de corto y largo plazo, bitácora y la tool MCP) con la respuesta ya formateada. Requiere kernel con el venv del proyecto y `GROQ_API_KEY` válida en `.env`.
+
 El venv incluye `ipykernel` y `jupyter` para usar el agente desde notebooks.
 
 **Kernel ya registrado** como "Python (AAC)". En VS Code:
 
 1. Instalar la extensión "Jupyter" de Microsoft (si no la tenés).
-2. `Ctrl+Shift+P` → "Create: New Jupyter Notebook" (o abrí un `.ipynb` existente).
+2. Abrir `demo.ipynb` (o `Ctrl+Shift+P` → "Create: New Jupyter Notebook").
 3. Arriba a la derecha, click en el selector de kernel → elegí **"Python (AAC)"**.
-4. En una celda:
-   ```python
-   from src.agent.auditor import auditar_publicacion
-   resultado = auditar_publicacion("Necesito arreglar el ascensor", "ascensor")
-   resultado
-   ```
-5. La celda devuelve un dict con `estado`, `alertas`, `recomendaciones_generales`, etc.
+4. Dar Run celda por celda (Shift+Enter) y leer la respuesta bajo cada ejemplo.
 
 **Si el kernel no aparece**, recargá VS Code (`Ctrl+Shift+P` → "Reload Window").
 
-**Para notebook clásico de Jupyter** (no VS Code), ejecutá `jupyter notebook` en otra terminal con el venv activado. Abrí la URL que muestra (típicamente `http://localhost:8888`), creá un notebook nuevo y elegí el kernel "Python (AAC)".
+**Para notebook clásico de Jupyter** (no VS Code), ejecutá `jupyter notebook` en otra terminal con el venv activado y abrir `demo.ipynb`.
 
 ---
 
@@ -173,8 +169,9 @@ agente-auditor-comunitario/
 ├── requirements.txt       # dependencias
 ├── pytest.ini             # configuración de tests
 ├── .env.example           # plantilla de variables de entorno
-├── informe.md             # informe técnico (fuente)
-├── informe.pdf            # informe técnico (PDF entregable, se regenera con scripts/md_a_pdf.py)
+├── demo.ipynb             # notebook de demostración: ejemplos listos para dar Run
+├── informe.md             # informe técnico (fuente, gitignored)
+├── informe.pdf            # informe técnico (PDF entregable, gitignored)
 ├── data/
 │   ├── normativa/         # textos legales fuente (pdf)
 │   ├── eval/              # evidencia de pruebas: v1/, v2/ (prompts) y ev2/ (demo del agente)
