@@ -40,12 +40,29 @@ El diagrama del grafo (nodos, aristas condicionales y flujos) vive en `docs/diag
 ## Toma de decisiones adaptativa (IE7) — reglas concretas
 
 1. **Reintento ante fallo**: si un subagente lanza excepción, el enrutador re-despacha el mismo paso una vez (`MAX_INTENTOS_POR_PASO = 2`). Si vuelve a fallar, lo salta y el finalizador reporta el error sin colapsar.
-2. **Publicación vaga → revisión en vez de informe**: si el auditor devuelve `no_cumple` sin alertas técnicas, o el texto es muy corto o pide "ayuda", el redactor cambia a modo `proponer_revision` (reescribe la publicación de forma que sí sea útil para proveedores).
+2. **Publicación vaga → cuestionario en vez de informe**: si el auditor devuelve `no_cumple` sin alertas técnicas, o el texto es muy corto o pide "ayuda", el redactor cambia a modo `proponer_revision` y emite un cuestionario + plantilla con campos `[COMPLETAR]` para que el administrador entregue los datos que faltan. No se reescribe la publicación con un problema supuesto: el redactor tiene prohibido inventar hechos o contenido legal (corrección de un caso detectado en pruebas, ver §"Corrección anti-alucinación" abajo).
 3. **Ruta según tipo de tarea**: pregunta sobre normativa despliega `consulta_normativa` + respuesta redactada; trabajo concreto despliega `auditoria` + informe. El planificador LLM decide con criterio estricto en el prompt; si falla, aplica la heurística por regex.
 4. **LLM del planificador indisponible**: se degrada a plan heurístico determinístico y el flujo completo sigue funcionando.
 5. **Primera ejecución sin experiencias**: `buscar_experiencias()` devuelve colección vacía y los prompts usan "(sin experiencias previas)" — el sistema no depende de que la memoria esté poblada.
 
 Estas decisiones están evidenciadas en `data/eval/ev2/*.json` (bitácora por escenario, corrida real con Groq).
+
+---
+
+## Corrección anti-alucinación (detectada en pruebas)
+
+**Problema**: ante la publicación vaga *"Necesito ayuda con unas cosas del edificio"*, el modo `proponer_revision` original generaba una publicación ficticia ("reparación de empalmes eléctricos en el tercer piso, olor a quemado, urgencia alta") con citas legales inventadas.
+
+**Causa raíz** (rastreada en `data/interacciones.jsonl`):
+1. El template pedía "descripción detallada del problema" cuando la entrada no tenía problema alguno → el LLM rellenaba el vacío con ficción.
+2. El RAG, ante una query vaga, devuelve fragmentos con score bajo (~0.45): `sec_ric_01_empalmes`, `Ley 21.442 Art. 78/61`. La metadata de esas fuentes viajaba en el JSON de la auditoría al redactor, que construía la novela alrededor de ellas.
+3. La regla "nunca inventes artículos" no cubría el caso: los artículos citados existían en la metadata, pero el redactor solo veía `fuente/articulo/score`, no el texto legal → inventaba el contenido atribuido.
+
+**Corrección aplicada**:
+- `proponer_revision` ahora genera un **cuestionario + plantilla con campos `[COMPLETAR]`** (no reescribe la publicación).
+- Reglas 3-5 de `SYSTEM_REDACCION`: prohibido inventar hechos (síntomas, urgencias, montos, plazos) y prohibido describir el contenido de normas sin su texto; solo se menciona la referencia tal como viene en las alertas.
+- `user_redaccion()` filtra la auditoría a `estado/alertas/recomendaciones_generales`: la metadata de `fragmentos_recuperados` ya no llega al LLM.
+- Tests de regresión: `tests/test_herramientas.py` (3 tests que fijan este comportamiento).
 
 ---
 
@@ -55,7 +72,7 @@ Estas decisiones están evidenciadas en `data/eval/ev2/*.json` (bitácora por es
 |---|---|---|---|
 | Consulta | `buscar_normativa()` | `src/herramientas/consulta.py` | RAG sobre la normativa (Ley 21.442 + RIC SEC); reutiliza `src/retriever/search.py` de la EV1 |
 | Razonamiento | `auditar()` | `src/herramientas/razonamiento.py` | Núcleo EV1 (RAG + LLM con prompt v2 y few-shots); devuelve veredicto con citas legales |
-| Escritura | `redactar()` | `src/herramientas/redaccion.py` | Genera informe de auditoría, revisión de publicación vaga o respuesta normativa (3 modos, JSON validado) |
+| Escritura | `redactar()` | `src/herramientas/redaccion.py` | Genera informe de auditoría, cuestionario para publicación vaga o respuesta normativa (3 modos, JSON validado) |
 
 ---
 

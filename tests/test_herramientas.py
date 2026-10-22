@@ -71,3 +71,49 @@ def test_redactar_modo_invalido_lanza_error():
 
     with pytest.raises(ValueError):
         redactar("modo_inexistente", "texto")
+
+
+def test_proponer_revision_pide_datos_no_inventa():
+    from src.herramientas.prompts import user_redaccion
+
+    mensaje = user_redaccion(
+        modo="proponer_revision",
+        texto="Necesito ayuda con unas cosas del edificio",
+        categoria="general",
+        auditoria={"estado": "no_cumple", "alertas": []},
+    )
+    assert "[COMPLETAR]" in mensaje
+    assert "cuestionario" in mensaje.lower()
+    assert "descripcion detallada del problema" not in mensaje
+    assert "NO describas ni supongas el problema" in mensaje
+
+
+def test_user_redaccion_no_expone_fragmentos_recuperados():
+    from src.herramientas.prompts import user_redaccion
+
+    auditoria = {
+        "estado": "no_cumple",
+        "alertas": [{"fuente": "Plataforma", "articulo": "-", "mensaje": "vaga"}],
+        "recomendaciones_generales": [],
+        "fragmentos_recuperados": [
+            {"fuente": "sec_ric_01_empalmes", "articulo": "Punto 7.6", "score": 0.48}
+        ],
+        "latencia_ms": 1234,
+    }
+    mensaje = user_redaccion(
+        modo="proponer_revision",
+        texto="Necesito ayuda",
+        categoria="general",
+        auditoria=auditoria,
+    )
+    assert "fragmentos_recuperados" not in mensaje
+    assert "empalmes" not in mensaje
+    assert "score" not in mensaje
+    assert "Plataforma" in mensaje
+
+
+def test_system_redaccion_prohibe_inventar_hechos():
+    from src.herramientas.prompts import SYSTEM_REDACCION
+
+    assert "NUNCA inventes hechos" in SYSTEM_REDACCION
+    assert "[COMPLETAR]" in SYSTEM_REDACCION
