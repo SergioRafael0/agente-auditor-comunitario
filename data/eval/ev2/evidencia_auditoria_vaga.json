@@ -1,0 +1,36 @@
+{
+  "nombre": "auditoria_vaga",
+  "criterio": "IE7: decision adaptativa ante publicacion vaga -> el redactor propone revision en vez de informar incumplimiento.",
+  "esperado": {
+    "modo_redaccion": "proponer_revision"
+  },
+  "resumen": {
+    "tipo_tarea": "auditoria",
+    "plan": [
+      "memoria",
+      "auditoria",
+      "redaccion",
+      "guardar_memoria"
+    ],
+    "veredicto": "no_cumple",
+    "n_alertas": 1,
+    "modo_redaccion": "proponer_revision",
+    "experiencias_previas": 3,
+    "errores": []
+  },
+  "decisiones": [
+    "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 1825 ms.",
+    "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas de auditorías de edificios similares para contextualizar la solicitud vaga..",
+    "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+    "[enrutador] Despacho paso 'auditoria' (prioridad 2): Evaluar el cumplimiento normativo de la publicación, detectando la falta de detalle y posibles áreas de revisión..",
+    "[subagente_auditor] Veredicto del auditor: no_cumple (1 alertas).",
+    "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar el informe preliminar indicando la necesidad de mayor información y proponiendo los próximos pasos..",
+    "[subagente_redactor] Publicacion vaga: se propone una revision en vez de un informe de incumplimiento.",
+    "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): Persistir la experiencia de esta auditoría para futuros casos de solicitudes generales sobre edificios..",
+    "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+    "[enrutador] Plan completado: finalizo y redacto resumen.",
+    "[finalizador] Respuesta final compuesta."
+  ],
+  "ok": true,
+  "segundos": 19.2
+}

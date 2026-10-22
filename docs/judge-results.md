@@ -80,12 +80,12 @@ cat data/eval/judge_results.json | python -m json.tool
 
 Outputs:
 - `data/eval/v1/*.json` y `data/eval/v2/*.json`: outputs del agente
-- `data/judge_input.jsonl`: registros en formato que espera `judge.py`
 - `data/eval/judge_results.json`: resultados del juez con promedios
+- `data/judge_input.jsonl` (intermedio generado, no versionado): registros en formato que espera `judge.py`
 
 ## Limitaciones del método
 
 - **Mismo modelo como juez y como agente** puede introducir sesgo (el juez puede favorecer el estilo del prompt v2 porque comparte el mismo modelo base).
 - **Solo 8 casos** por versión — una muestra pequeña. Para el MVP es suficiente; para producción se necesitarían 50+ casos.
 - **El juez no es perfecto**: scores bajos pueden reflejar problemas del juez, no del agente. Es una heurística, no una verdad absoluta.
-- **No evalúa latencia ni costo**: solo calidad. Para esos hay otras métricas (en `data/eval/v*/_resumen.json`).
+- **No evalúa latencia ni costo**: solo calidad. Esos datos quedan en los logs (`data/agente_ejecuciones.jsonl`, `data/interacciones.jsonl`).

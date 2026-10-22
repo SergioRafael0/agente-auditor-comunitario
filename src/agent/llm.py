@@ -16,7 +16,7 @@ def cliente() -> Groq:
 
 
 def modelo_default() -> str:
-    return os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    return os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 
 
 def temperatura_default() -> float:

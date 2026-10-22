@@ -1,0 +1,37 @@
+{
+  "nombre": "planificador_degradado",
+  "criterio": "IE7: decision adaptativa ante LLM indisponible -> plan heuristico, flujo completo sin interrumpirse.",
+  "esperado": {
+    "tipo_tarea": "auditoria",
+    "plan": "heuristico"
+  },
+  "resumen": {
+    "tipo_tarea": "auditoria",
+    "plan": [
+      "memoria",
+      "auditoria",
+      "redaccion",
+      "guardar_memoria"
+    ],
+    "veredicto": "alerta",
+    "n_alertas": 1,
+    "modo_redaccion": "informe_auditoria",
+    "experiencias_previas": 3,
+    "errores": []
+  },
+  "decisiones": [
+    "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 21 ms.",
+    "[enrutador] Despacho paso 'memoria' (prioridad 1): experiencias previas similares.",
+    "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+    "[enrutador] Despacho paso 'auditoria' (prioridad 2): evaluar cumplimiento normativo.",
+    "[subagente_auditor] Veredicto del auditor: alerta (1 alertas).",
+    "[enrutador] Despacho paso 'redaccion' (prioridad 3): informe o revision de la publicacion.",
+    "[subagente_redactor] Informe de auditoria redactado.",
+    "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): persistir experiencia.",
+    "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+    "[enrutador] Plan completado: finalizo y redacto resumen.",
+    "[finalizador] Respuesta final compuesta."
+  ],
+  "ok": true,
+  "segundos": 37.3
+}

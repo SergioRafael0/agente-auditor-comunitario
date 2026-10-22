@@ -16,12 +16,21 @@ pypdf>=5.0
 mcp[cli]>=1.2.0,<2.0
 uvicorn>=0.30
 starlette>=0.37
+httpx>=0.27
+
+# Framework de agentes (EV2) — src/grafo/grafo.py, src/grafo/planificador.py
+# Fijado a 1.x: mismo criterio que mcp, evitar saltos de API mayores.
+langgraph>=1.2,<2.0
+langgraph-checkpoint-sqlite>=3.0
 
 # Config
 python-dotenv>=1.0
 
 # Utilidades
 pydantic>=2.0
+
+# Generacion del PDF del informe — scripts/md_a_pdf.py
+fpdf2>=2.7
 
 # Tests
 pytest>=8.0

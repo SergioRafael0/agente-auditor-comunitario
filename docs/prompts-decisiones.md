@@ -77,7 +77,7 @@ El **ejemplo 2 es clave**: muestra al modelo cuándo SÍ corresponde `no_cumple`
 
 - `prompts.py:few_shots_texto()` genera el bloque markdown con los ejemplos.
 - `auditor.py` concatena `SYSTEM_AUDITOR + few_shots_texto()` antes de llamar al LLM.
-- El bug de v1 (few-shots definidos pero no usados) está documentado en `AGENTS.md` §9.
+- El bug de v1 (few-shots definidos pero no inyectados) se detectó con la batería de evaluación: v1 clasificaba "necesito ayuda" como `alerta` en vez de `no_cumple`.
 
 ---
 

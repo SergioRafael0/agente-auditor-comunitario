@@ -26,6 +26,5 @@ jobs:
 
       - name: Run tests
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           MCP_AUTH_TOKEN: test-token
         run: pytest

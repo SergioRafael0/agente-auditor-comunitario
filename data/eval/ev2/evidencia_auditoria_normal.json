@@ -1,0 +1,33 @@
+{
+  "nombre": "auditoria_normal",
+  "criterio": "IE5: plan previamente priorizado (memoria -> auditoria -> redaccion -> guardar_memoria).",
+  "resumen": {
+    "tipo_tarea": "auditoria",
+    "plan": [
+      "memoria",
+      "auditoria",
+      "redaccion",
+      "guardar_memoria"
+    ],
+    "veredicto": "alerta",
+    "n_alertas": 2,
+    "modo_redaccion": "informe_auditoria",
+    "experiencias_previas": 3,
+    "errores": []
+  },
+  "decisiones": [
+    "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 2001 ms.",
+    "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas de instalaciones de portones eléctricos en edificios similares para orientar la auditoría..",
+    "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+    "[enrutador] Despacho paso 'auditoria' (prioridad 2): Evaluar el cumplimiento de la normativa eléctrica y de seguridad aplicable a la instalación del portón eléctrico..",
+    "[subagente_auditor] Veredicto del auditor: alerta (2 alertas).",
+    "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar el informe de auditoría con observaciones, recomendaciones y plan de acción..",
+    "[subagente_redactor] Informe de auditoria redactado.",
+    "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): Persistir la experiencia y resultados para futuros casos de auditoría de instalaciones eléctricas..",
+    "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+    "[enrutador] Plan completado: finalizo y redacto resumen.",
+    "[finalizador] Respuesta final compuesta."
+  ],
+  "ok": true,
+  "segundos": 18.5
+}

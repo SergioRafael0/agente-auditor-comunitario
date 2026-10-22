@@ -1,0 +1,33 @@
+{
+  "nombre": "consulta_normativa",
+  "criterio": "IE7: decision adaptativa de ruta -> tarea de consulta con plan distinto (sin auditoria).",
+  "esperado": {
+    "tipo_tarea": "consulta_normativa"
+  },
+  "resumen": {
+    "tipo_tarea": "consulta_normativa",
+    "plan": [
+      "memoria",
+      "consulta_normativa",
+      "redaccion"
+    ],
+    "veredicto": null,
+    "n_alertas": 0,
+    "modo_redaccion": "respuesta_consulta",
+    "experiencias_previas": 3,
+    "errores": []
+  },
+  "decisiones": [
+    "[supervisor_planificador] Tipo de tarea 'consulta_normativa'. Plan de 3 pasos priorizados (memoria, consulta_normativa, redaccion). Generado en 3764 ms.",
+    "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas sobre cambios de tableros eléctricos y requisitos de la SEC para contextualizar la respuesta..",
+    "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+    "[enrutador] Despacho paso 'consulta_normativa' (prioridad 2): Buscar en el índice RAG los fragmentos legales y técnicos de la normativa SEC que regulan el reemplazo de tableros eléctricos en edificios..",
+    "[subagente_consulta] Se encontraron 5 fragmentos de 3 fuentes.",
+    "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar la respuesta final con los requisitos normativos identificados, de forma clara y estructurada para el usuario..",
+    "[subagente_redactor] Consulta normativa respondida con citas del RAG.",
+    "[enrutador] Plan completado: finalizo y redacto resumen.",
+    "[finalizador] Respuesta final compuesta."
+  ],
+  "ok": true,
+  "segundos": 36.7
+}

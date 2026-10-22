@@ -1,0 +1,36 @@
+{
+  "nombre": "memoria_largo_plazo",
+  "criterio": "IE3: memoria de largo plazo -> recupera experiencias auditadas previas por similitud.",
+  "esperado": {
+    "experiencias_previas": ">= 1"
+  },
+  "resumen": {
+    "tipo_tarea": "auditoria",
+    "plan": [
+      "memoria",
+      "auditoria",
+      "redaccion",
+      "guardar_memoria"
+    ],
+    "veredicto": "alerta",
+    "n_alertas": 1,
+    "modo_redaccion": "informe_auditoria",
+    "experiencias_previas": 3,
+    "errores": []
+  },
+  "decisiones": [
+    "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 8728 ms.",
+    "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas de instalaciones de puertas automáticas en condominios para identificar requisitos y problemas comunes..",
+    "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+    "[enrutador] Despacho paso 'auditoria' (prioridad 2): Evaluar el cumplimiento de la publicación con la normativa eléctrica y de seguridad aplicable al condominio..",
+    "[subagente_auditor] Veredicto del auditor: alerta (1 alertas).",
+    "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar el informe de auditoría con los hallazgos, recomendaciones y posibles acciones correctivas..",
+    "[subagente_redactor] Informe de auditoria redactado.",
+    "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): Persistir la experiencia y resultados de la auditoría para futuros análisis similares..",
+    "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+    "[enrutador] Plan completado: finalizo y redacto resumen.",
+    "[finalizador] Respuesta final compuesta."
+  ],
+  "ok": true,
+  "segundos": 56.5
+}

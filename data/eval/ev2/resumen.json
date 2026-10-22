@@ -1,0 +1,177 @@
+[
+  {
+    "nombre": "auditoria_normal",
+    "criterio": "IE5: plan previamente priorizado (memoria -> auditoria -> redaccion -> guardar_memoria).",
+    "resumen": {
+      "tipo_tarea": "auditoria",
+      "plan": [
+        "memoria",
+        "auditoria",
+        "redaccion",
+        "guardar_memoria"
+      ],
+      "veredicto": "alerta",
+      "n_alertas": 2,
+      "modo_redaccion": "informe_auditoria",
+      "experiencias_previas": 3,
+      "errores": []
+    },
+    "decisiones": [
+      "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 2001 ms.",
+      "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas de instalaciones de portones eléctricos en edificios similares para orientar la auditoría..",
+      "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+      "[enrutador] Despacho paso 'auditoria' (prioridad 2): Evaluar el cumplimiento de la normativa eléctrica y de seguridad aplicable a la instalación del portón eléctrico..",
+      "[subagente_auditor] Veredicto del auditor: alerta (2 alertas).",
+      "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar el informe de auditoría con observaciones, recomendaciones y plan de acción..",
+      "[subagente_redactor] Informe de auditoria redactado.",
+      "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): Persistir la experiencia y resultados para futuros casos de auditoría de instalaciones eléctricas..",
+      "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+      "[enrutador] Plan completado: finalizo y redacto resumen.",
+      "[finalizador] Respuesta final compuesta."
+    ],
+    "ok": true,
+    "segundos": 18.5
+  },
+  {
+    "nombre": "auditoria_vaga",
+    "criterio": "IE7: decision adaptativa ante publicacion vaga -> el redactor propone revision en vez de informar incumplimiento.",
+    "esperado": {
+      "modo_redaccion": "proponer_revision"
+    },
+    "resumen": {
+      "tipo_tarea": "auditoria",
+      "plan": [
+        "memoria",
+        "auditoria",
+        "redaccion",
+        "guardar_memoria"
+      ],
+      "veredicto": "no_cumple",
+      "n_alertas": 1,
+      "modo_redaccion": "proponer_revision",
+      "experiencias_previas": 3,
+      "errores": []
+    },
+    "decisiones": [
+      "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 1825 ms.",
+      "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas de auditorías de edificios similares para contextualizar la solicitud vaga..",
+      "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+      "[enrutador] Despacho paso 'auditoria' (prioridad 2): Evaluar el cumplimiento normativo de la publicación, detectando la falta de detalle y posibles áreas de revisión..",
+      "[subagente_auditor] Veredicto del auditor: no_cumple (1 alertas).",
+      "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar el informe preliminar indicando la necesidad de mayor información y proponiendo los próximos pasos..",
+      "[subagente_redactor] Publicacion vaga: se propone una revision en vez de un informe de incumplimiento.",
+      "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): Persistir la experiencia de esta auditoría para futuros casos de solicitudes generales sobre edificios..",
+      "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+      "[enrutador] Plan completado: finalizo y redacto resumen.",
+      "[finalizador] Respuesta final compuesta."
+    ],
+    "ok": true,
+    "segundos": 19.2
+  },
+  {
+    "nombre": "consulta_normativa",
+    "criterio": "IE7: decision adaptativa de ruta -> tarea de consulta con plan distinto (sin auditoria).",
+    "esperado": {
+      "tipo_tarea": "consulta_normativa"
+    },
+    "resumen": {
+      "tipo_tarea": "consulta_normativa",
+      "plan": [
+        "memoria",
+        "consulta_normativa",
+        "redaccion"
+      ],
+      "veredicto": null,
+      "n_alertas": 0,
+      "modo_redaccion": "respuesta_consulta",
+      "experiencias_previas": 3,
+      "errores": []
+    },
+    "decisiones": [
+      "[supervisor_planificador] Tipo de tarea 'consulta_normativa'. Plan de 3 pasos priorizados (memoria, consulta_normativa, redaccion). Generado en 3764 ms.",
+      "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas sobre cambios de tableros eléctricos y requisitos de la SEC para contextualizar la respuesta..",
+      "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+      "[enrutador] Despacho paso 'consulta_normativa' (prioridad 2): Buscar en el índice RAG los fragmentos legales y técnicos de la normativa SEC que regulan el reemplazo de tableros eléctricos en edificios..",
+      "[subagente_consulta] Se encontraron 5 fragmentos de 3 fuentes.",
+      "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar la respuesta final con los requisitos normativos identificados, de forma clara y estructurada para el usuario..",
+      "[subagente_redactor] Consulta normativa respondida con citas del RAG.",
+      "[enrutador] Plan completado: finalizo y redacto resumen.",
+      "[finalizador] Respuesta final compuesta."
+    ],
+    "ok": true,
+    "segundos": 36.7
+  },
+  {
+    "nombre": "memoria_largo_plazo",
+    "criterio": "IE3: memoria de largo plazo -> recupera experiencias auditadas previas por similitud.",
+    "esperado": {
+      "experiencias_previas": ">= 1"
+    },
+    "resumen": {
+      "tipo_tarea": "auditoria",
+      "plan": [
+        "memoria",
+        "auditoria",
+        "redaccion",
+        "guardar_memoria"
+      ],
+      "veredicto": "alerta",
+      "n_alertas": 1,
+      "modo_redaccion": "informe_auditoria",
+      "experiencias_previas": 3,
+      "errores": []
+    },
+    "decisiones": [
+      "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 8728 ms.",
+      "[enrutador] Despacho paso 'memoria' (prioridad 1): Recuperar experiencias previas de instalaciones de puertas automáticas en condominios para identificar requisitos y problemas comunes..",
+      "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+      "[enrutador] Despacho paso 'auditoria' (prioridad 2): Evaluar el cumplimiento de la publicación con la normativa eléctrica y de seguridad aplicable al condominio..",
+      "[subagente_auditor] Veredicto del auditor: alerta (1 alertas).",
+      "[enrutador] Despacho paso 'redaccion' (prioridad 3): Redactar el informe de auditoría con los hallazgos, recomendaciones y posibles acciones correctivas..",
+      "[subagente_redactor] Informe de auditoria redactado.",
+      "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): Persistir la experiencia y resultados de la auditoría para futuros análisis similares..",
+      "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+      "[enrutador] Plan completado: finalizo y redacto resumen.",
+      "[finalizador] Respuesta final compuesta."
+    ],
+    "ok": true,
+    "segundos": 56.5
+  },
+  {
+    "nombre": "planificador_degradado",
+    "criterio": "IE7: decision adaptativa ante LLM indisponible -> plan heuristico, flujo completo sin interrumpirse.",
+    "esperado": {
+      "tipo_tarea": "auditoria",
+      "plan": "heuristico"
+    },
+    "resumen": {
+      "tipo_tarea": "auditoria",
+      "plan": [
+        "memoria",
+        "auditoria",
+        "redaccion",
+        "guardar_memoria"
+      ],
+      "veredicto": "alerta",
+      "n_alertas": 1,
+      "modo_redaccion": "informe_auditoria",
+      "experiencias_previas": 3,
+      "errores": []
+    },
+    "decisiones": [
+      "[supervisor_planificador] Tipo de tarea 'auditoria'. Plan de 4 pasos priorizados (memoria, auditoria, redaccion, guardar_memoria). Generado en 21 ms.",
+      "[enrutador] Despacho paso 'memoria' (prioridad 1): experiencias previas similares.",
+      "[subagente_memoria] Se recuperaron 3 experiencias previas.",
+      "[enrutador] Despacho paso 'auditoria' (prioridad 2): evaluar cumplimiento normativo.",
+      "[subagente_auditor] Veredicto del auditor: alerta (1 alertas).",
+      "[enrutador] Despacho paso 'redaccion' (prioridad 3): informe o revision de la publicacion.",
+      "[subagente_redactor] Informe de auditoria redactado.",
+      "[enrutador] Despacho paso 'guardar_memoria' (prioridad 4): persistir experiencia.",
+      "[subagente_guardar_memoria] Experiencia guardada en memoria de largo plazo.",
+      "[enrutador] Plan completado: finalizo y redacto resumen.",
+      "[finalizador] Respuesta final compuesta."
+    ],
+    "ok": true,
+    "segundos": 37.3
+  }
+]

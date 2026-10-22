@@ -56,7 +56,7 @@ class InformePDF(FPDF):
             return
         self.set_font("cuerpo", "I", 7)
         self.set_text_color(120, 120, 120)
-        self.cell(0, 5, "Agente Auditor Comunitario (AAC) - Sergio de la Cruz - ISY0101", align="C", new_x="LMARGIN", new_y="NEXT")
+        self.cell(0, 5, "Agente Auditor Comunitario (AAC) - ISY0101 - Duoc UC", align="C", new_x="LMARGIN", new_y="NEXT")
         self.set_text_color(0, 0, 0)
         self.ln(1)
 
