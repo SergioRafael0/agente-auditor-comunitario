@@ -32,6 +32,10 @@ pydantic>=2.0
 # Generacion del PDF del informe — scripts/md_a_pdf.py
 fpdf2>=2.7
 
+# Observabilidad (EV3) — dashboard y tablas de metricas
+streamlit>=1.37
+pandas>=2.0
+
 # Tests
 pytest>=8.0
 pytest-cov>=4.0

@@ -20,6 +20,8 @@ MAX_INTENTOS_POR_PASO = 2
 class EstadoAgente(TypedDict, total=False):
     publicacion: str
     categoria: str
+    trace_id: str
+    thread_id: str
     tipo_tarea: str
     plan: list[dict]
     indice_paso: int

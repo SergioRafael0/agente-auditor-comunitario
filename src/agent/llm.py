@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import logging
 import os
+import time
 
 from groq import Groq
 
 from src.agent.respuestas_demo import simular
+from src.observabilidad.instrumentacion import registrar_llamada_llm
 
 logger = logging.getLogger(__name__)
 
@@ -51,29 +53,63 @@ def temperatura_default() -> float:
     return float(os.getenv("GROQ_TEMPERATURE", "0.2"))
 
 
-def generar(system: str, user: str, modelo: str | None = None, temperatura: float | None = None) -> str:
+def generar(
+    system: str,
+    user: str,
+    modelo: str | None = None,
+    temperatura: float | None = None,
+    rol: str = "llm",
+) -> str:
     """Llama al LLM con system + user y devuelve el texto de respuesta.
 
     En modo demo devuelve respuestas simuladas (basadas en corridas reales
     del sistema) en vez de consumir la API de Groq. Si la API falla a mitad
     de camino (clave invalida, sin conexion), degrada a la simulacion.
+
+    Cada llamada queda registrada como evento "llm_llamada" (latencia,
+    tokens, modelo y modo real/demo/fallback_demo) en data/eventos.jsonl.
+    `rol` identifica al consumidor (planificador, auditor, redaccion, judge)
+    para las metricas por tipo de llamada.
     """
     global _se_uso_demo
+    modelo_usado = modelo or modelo_default()
+    temp = temperatura if temperatura is not None else temperatura_default()
+    inicio = time.time()
+
     if modo_demo():
         _se_uso_demo = True
-        return simular(system, user)
+        texto = simular(system, user)
+        registrar_llamada_llm(
+            rol, modelo_usado, temp, inicio, modo="demo",
+            texto_entrada=system + user, texto_salida=texto,
+        )
+        return texto
     try:
         cli = cliente()
         response = cli.chat.completions.create(
-            model=modelo or modelo_default(),
-            temperature=temperatura if temperatura is not None else temperatura_default(),
+            model=modelo_usado,
+            temperature=temp,
             messages=[
                 {"role": "system", "content": system},
                 {"role": "user", "content": user},
             ],
         )
-        return response.choices[0].message.content or ""
+        texto = response.choices[0].message.content or ""
+        uso = getattr(response, "usage", None)
+        registrar_llamada_llm(
+            rol, modelo_usado, temp, inicio, modo="real",
+            texto_entrada=system + user, texto_salida=texto,
+            tokens_entrada=getattr(uso, "prompt_tokens", None),
+            tokens_salida=getattr(uso, "completion_tokens", None),
+        )
+        return texto
     except Exception as e:
         logger.warning("LLM no disponible (%s). Uso respuesta de demostracion.", e)
         _se_uso_demo = True
-        return simular(system, user)
+        texto = simular(system, user)
+        registrar_llamada_llm(
+            rol, modelo_usado, temp, inicio, modo="fallback_demo",
+            texto_entrada=system + user, texto_salida=texto,
+            error=f"{type(e).__name__}: {e}",
+        )
+        return texto

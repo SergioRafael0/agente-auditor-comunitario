@@ -40,7 +40,7 @@ def evaluar_registro(registro: dict) -> dict:
         f"Respuesta del agente:\n{respuesta}\n\n"
         "Evalua y devuelve el JSON pedido."
     )
-    raw = generar(JUDGE_SYSTEM, user, temperatura=0.0)
+    raw = generar(JUDGE_SYSTEM, user, temperatura=0.0, rol="judge")
     try:
         return json.loads(raw)
     except json.JSONDecodeError:

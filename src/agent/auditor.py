@@ -14,7 +14,9 @@ from pydantic import BaseModel, Field
 
 from src.agent.llm import generar
 from src.agent.prompts import SYSTEM_AUDITOR, USER_TEMPLATE, few_shots_texto
+from src.observabilidad import trazas
 from src.retriever.search import buscar
+from src.util.privacidad import texto_para_log
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +43,7 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
     4. Devuelve dict con el resultado + metadata de trazabilidad.
     """
     inicio = time.time()
+    trace = trazas.asegurar_traza()
     fragmentos = buscar(texto, categoria=categoria, top_k=5)
 
     contexto_partes = []
@@ -55,13 +58,14 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
     user_msg = USER_TEMPLATE.format(texto=texto, categoria=categoria, contexto=contexto)
     system_msg = SYSTEM_AUDITOR + few_shots_texto()
 
-    respuesta_llm = generar(system=system_msg, user=user_msg)
+    respuesta_llm = generar(system=system_msg, user=user_msg, rol="auditor")
 
     try:
         data = json.loads(respuesta_llm)
         resultado = ResultadoAuditoria(**data)
     except (json.JSONDecodeError, ValueError) as e:
         logger.warning("LLM no devolvio JSON valido: %s. Respuesta cruda: %s", e, respuesta_llm[:200])
+        trazas.registrar_evento("fallback", componente="auditor", detalle=f"JSON invalido: {type(e).__name__}: {e}")
         resultado = ResultadoAuditoria(
             estado="no_cumple",
             alertas=[
@@ -79,6 +83,7 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
 
     resultado_dict = {
         "interaccion_id": interaccion_id,
+        "trace_id": trace,
         "estado": resultado.estado,
         "alertas": [a.model_dump() for a in resultado.alertas],
         "recomendaciones_generales": resultado.recomendaciones_generales,
@@ -92,9 +97,11 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
     _loggear_interaccion(
         {
             "interaccion_id": interaccion_id,
+            "trace_id": trace,
+            "thread_id": trazas.thread_id(),
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "tool": "revisar_publicacion",
-            "input": {"texto": texto, "categoria": categoria},
+            "input": {"texto": texto_para_log(texto), "categoria": categoria},
             "fragmentos_recuperados": resultado_dict["fragmentos_recuperados"],
             "respuesta": {
                 "estado": resultado_dict["estado"],
@@ -120,7 +127,7 @@ if __name__ == "__main__":
     from dotenv import load_dotenv
 
     load_dotenv()
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+    logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(asctime)s [%(levelname)s] %(message)s")
 
     parser = argparse.ArgumentParser(description="Probar el agente auditor desde CLI.")
     parser.add_argument("--texto", required=True, help="Descripcion de la publicacion")

@@ -153,7 +153,9 @@ def _parece_consulta(user: str) -> bool:
 
 
 def _es_publicacion_vaga(user: str) -> bool:
-    m = re.search(r"Publicacion(?: vaga o insuficiente)? \(categoria=[^)]*\): (.*)", user)
+    m = re.search(r"Descripcion: ([^\n]*)", user) or re.search(
+        r"Publicacion(?: vaga o insuficiente)? \(categoria=[^)]*\): (.*)", user
+    )
     texto = (m.group(1) if m else user).strip().lower()
     return len(texto) < 30 or "ayuda" in texto
 

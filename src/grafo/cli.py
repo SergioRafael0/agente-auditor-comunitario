@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sys
 
 from dotenv import load_dotenv
@@ -16,7 +17,7 @@ def main() -> None:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     load_dotenv()
-    logging.basicConfig(level=logging.WARNING, format="%(asctime)s [%(levelname)s] %(message)s")
+    logging.basicConfig(level=os.getenv("LOG_LEVEL", "WARNING"), format="%(asctime)s [%(levelname)s] %(message)s")
 
     parser = argparse.ArgumentParser(description="Agente Auditor Comunitario (grafo LangGraph).")
     parser.add_argument("--texto", required=True, help="Texto de la publicacion o consulta normativa")

@@ -24,7 +24,7 @@ python -m src.grafo.cli --texto "Necesito ayuda con unas cosas del edificio" \
 
 Otras formas de probarlo sin clave:
 
-- `pytest` — 58 tests en verde (todos con LLM mockeado).
+- `pytest` — 105 tests en verde (todos con LLM mockeado).
 - `data/eval/ev2/` — corridas reales del agente (5 escenarios con bitácora).
 - `demo.ipynb` — los mismos ejemplos celda por celda; sin key arranca solo en modo demo.
 
@@ -73,6 +73,32 @@ Agregar `--demo` a cualquier comando para correr sin API key.
 
 ---
 
+## Observabilidad (Evaluación 3)
+
+El agente está instrumentado: cada ejecución recibe un `trace_id` que correlaciona
+los eventos granulares (`data/eventos.jsonl`), las auditorías
+(`data/interacciones.jsonl`) y las corridas completas (`data/agente_ejecuciones.jsonl`).
+
+```bash
+# Benchmark de metricas: precision, consistencia, errores, latencia y tokens
+# sobre 13 escenarios con variabilidad de datos (3 repeticiones cada uno)
+python -m scripts.benchmark_observabilidad --modo demo --repeticiones 3   # sin API key
+python -m scripts.benchmark_observabilidad --modo real --repeticiones 3   # con GROQ_API_KEY
+python -m scripts.benchmark_observabilidad --modo ambos --repeticiones 3
+
+# Analisis de logs: cuellos de botella, puntos de falla, anomalias y patrones
+python -m scripts.analizar_logs
+
+# Dashboard de monitoreo (Streamlit) en http://localhost:8501
+python -m streamlit run src/observabilidad/dashboard.py
+```
+
+Salidas de evidencia: `data/eval/ev3/` (corridas crudas y métricas) y
+`docs/analisis-logs-ev3.md` (hallazgos). Seguridad y privacidad:
+`docs/seguridad-privacidad.md`.
+
+---
+
 ## MCP server (Claude Desktop / Code)
 
 ```bash
@@ -91,9 +117,10 @@ Expone la herramienta `revisar_publicacion(texto, categoria)`. La configuración
 - `src/indexer/` — pasa los PDF de `data/normativa/` a chunks con embeddings en Chroma.
 - `src/retriever/` — búsqueda semántica con filtros.
 - `src/agent/` — cliente Groq (con modo demo), prompts del auditor y LLM-as-judge.
-- `src/mcp_server/` — servidor MCP con autenticación.
-- `tests/` — 58 tests pytest (mockean LLM y Chroma).
-- `scripts/` — demo, evaluación de prompts y smoke test del MCP.
+- `src/observabilidad/` — trazas, métricas, análisis de logs y dashboard (Evaluación 3).
+- `src/mcp_server/` — servidor MCP con autenticación, rate limit y auditoría de accesos.
+- `tests/` — 105 tests pytest (mockean LLM y Chroma) con 81% de cobertura.
+- `scripts/` — demo, benchmark de observabilidad, análisis de logs, evaluación de prompts y smoke test del MCP.
 - `data/eval/` — evidencia de corridas reales.
 
 Más detalle de diseño: `docs/decisiones-diseno-ev2.md`. Diagramas: `docs/diagrama-orquestacion.md`.

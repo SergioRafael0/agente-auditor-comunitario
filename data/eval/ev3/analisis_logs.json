@@ -1,0 +1,546 @@
+{
+  "fuentes": {
+    "eventos": {
+      "ruta": "data/eventos.jsonl",
+      "n": 791
+    },
+    "ejecuciones": {
+      "ruta": "data/agente_ejecuciones.jsonl",
+      "n": 24
+    },
+    "interacciones": {
+      "ruta": "data/interacciones.jsonl",
+      "n": 159
+    }
+  },
+  "cuellos_de_botella": {
+    "por_nodo": [
+      {
+        "nombre": "auditoria",
+        "n": 77,
+        "total_ms": 952030,
+        "promedio_ms": 12364.0,
+        "p95_ms": 40089.0,
+        "proporcion": 0.628
+      },
+      {
+        "nombre": "redaccion",
+        "n": 91,
+        "total_ms": 280212,
+        "promedio_ms": 3079.3,
+        "p95_ms": 12876.5,
+        "proporcion": 0.185
+      },
+      {
+        "nombre": "planificador",
+        "n": 91,
+        "total_ms": 242663,
+        "promedio_ms": 2666.6,
+        "p95_ms": 9806.5,
+        "proporcion": 0.16
+      },
+      {
+        "nombre": "memoria",
+        "n": 91,
+        "total_ms": 30755,
+        "promedio_ms": 338.0,
+        "p95_ms": 158.5,
+        "proporcion": 0.02
+      },
+      {
+        "nombre": "guardar_memoria",
+        "n": 77,
+        "total_ms": 8731,
+        "promedio_ms": 113.4,
+        "p95_ms": 220.40000000000003,
+        "proporcion": 0.006
+      },
+      {
+        "nombre": "consulta_normativa",
+        "n": 14,
+        "total_ms": 858,
+        "promedio_ms": 61.3,
+        "p95_ms": 112.49999999999999,
+        "proporcion": 0.001
+      },
+      {
+        "nombre": "finalizador",
+        "n": 91,
+        "total_ms": 1,
+        "promedio_ms": 0.0,
+        "p95_ms": 0.0,
+        "proporcion": 0.0
+      }
+    ],
+    "por_rol_llm": [
+      {
+        "nombre": "auditor",
+        "n": 77,
+        "total_ms": 932191,
+        "promedio_ms": 12106.4,
+        "p95_ms": 40014.4,
+        "proporcion": 0.641
+      },
+      {
+        "nombre": "redaccion",
+        "n": 91,
+        "total_ms": 280076,
+        "promedio_ms": 3077.8,
+        "p95_ms": 12873.0,
+        "proporcion": 0.193
+      },
+      {
+        "nombre": "planificador",
+        "n": 91,
+        "total_ms": 242550,
+        "promedio_ms": 2665.4,
+        "p95_ms": 9805.5,
+        "proporcion": 0.167
+      }
+    ],
+    "cuello_de_botella_principal": "auditoria",
+    "llm_vs_resto": {
+      "latencia_llm_ms": 1454817,
+      "latencia_nodos_ms": 1515250,
+      "proporcion_llm": 0.96
+    }
+  },
+  "puntos_de_falla": {
+    "fallos_por_nodo": {},
+    "fallbacks": [],
+    "llamadas_degradadas": [
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197373, Requested 4392. Please try again in 12m42.479999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "8be25efc-7a2f-4761-ad9e-d0b3bc9a4135"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197802, Requested 4356. Please try again in 15m32.256s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "1d1f2244-91de-42b3-9a50-1efa9905667a"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198744, Requested 4356. Please try again in 22m19.2s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "f3721916-7e18-43a2-a7de-125cde860245"
+      },
+      {
+        "rol": "planificador",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198742, Requested 1963. Please try again in 5m4.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "b45d28ee-31e6-4243-9bf2-bb679d5cb1df"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198740, Requested 5223. Please try again in 28m32.015999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "b45d28ee-31e6-4243-9bf2-bb679d5cb1df"
+      },
+      {
+        "rol": "planificador",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198738, Requested 1709. Please try again in 3m13.104s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "fc47d737-5a44-4e16-adbd-c66e27f4a464"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198736, Requested 4969. Please try again in 26m40.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "fc47d737-5a44-4e16-adbd-c66e27f4a464"
+      },
+      {
+        "rol": "planificador",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198734, Requested 1745. Please try again in 3m26.928s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "f564a3d4-1656-49c2-ad6e-62f6309cbf92"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198732, Requested 4969. Please try again in 26m38.832s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "f564a3d4-1656-49c2-ad6e-62f6309cbf92"
+      }
+    ],
+    "reintentos": [],
+    "corridas_con_error": [
+      {
+        "trace_id": null,
+        "errores": [
+          {
+            "paso": "auditoria",
+            "error": "Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'expired_api_key'}}"
+          },
+          {
+            "paso": "auditoria",
+            "error": "Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'expired_api_key'}}"
+          }
+        ]
+      },
+      {
+        "trace_id": null,
+        "errores": [
+          {
+            "paso": "auditoria",
+            "error": "Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'expired_api_key'}}"
+          },
+          {
+            "paso": "auditoria",
+            "error": "Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'expired_api_key'}}"
+          }
+        ]
+      },
+      {
+        "trace_id": null,
+        "errores": [
+          {
+            "paso": "redaccion",
+            "error": "Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per minute (TPM): Limit "
+          }
+        ]
+      }
+    ]
+  },
+  "anomalias": {
+    "outliers_latencia": [
+      {
+        "trace_id": null,
+        "latencia_total_ms": 51843,
+        "umbral_ms": 51237.1
+      },
+      {
+        "trace_id": null,
+        "latencia_total_ms": 56447,
+        "umbral_ms": 51237.1
+      }
+    ],
+    "fragmentos_score_bajo": [
+      {
+        "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+        "fuente": "ley_21442",
+        "score": 0.32564252614974976
+      },
+      {
+        "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+        "fuente": "ley_21442",
+        "score": 0.2892141342163086
+      },
+      {
+        "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+        "fuente": "ley_21442",
+        "score": 0.28871047496795654
+      },
+      {
+        "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+        "fuente": "ley_21442",
+        "score": 0.2755701541900635
+      },
+      {
+        "interaccion_id": "d2750927-be97-4f02-b683-09c927a1bedf",
+        "fuente": "ley_21442",
+        "score": 0.3483297824859619
+      },
+      {
+        "interaccion_id": "d2750927-be97-4f02-b683-09c927a1bedf",
+        "fuente": "ley_21442",
+        "score": 0.3343645930290222
+      },
+      {
+        "interaccion_id": "d2750927-be97-4f02-b683-09c927a1bedf",
+        "fuente": "ley_21442",
+        "score": 0.3290829658508301
+      },
+      {
+        "interaccion_id": "d2750927-be97-4f02-b683-09c927a1bedf",
+        "fuente": "ley_21442",
+        "score": 0.3287440538406372
+      },
+      {
+        "interaccion_id": "d2750927-be97-4f02-b683-09c927a1bedf",
+        "fuente": "ley_21442",
+        "score": 0.31761664152145386
+      },
+      {
+        "interaccion_id": "ca1dd087-6c09-4c29-b7ac-4ef14713d788",
+        "fuente": "ley_21442",
+        "score": 0.3483297824859619
+      },
+      {
+        "interaccion_id": "ca1dd087-6c09-4c29-b7ac-4ef14713d788",
+        "fuente": "ley_21442",
+        "score": 0.3343645930290222
+      },
+      {
+        "interaccion_id": "ca1dd087-6c09-4c29-b7ac-4ef14713d788",
+        "fuente": "ley_21442",
+        "score": 0.3290829658508301
+      },
+      {
+        "interaccion_id": "b34c9f97-471b-4d96-8e5b-e4f6ff9a4bb9",
+        "fuente": "ley_21442",
+        "score": 0.3483297824859619
+      },
+      {
+        "interaccion_id": "b34c9f97-471b-4d96-8e5b-e4f6ff9a4bb9",
+        "fuente": "ley_21442",
+        "score": 0.3343645930290222
+      },
+      {
+        "interaccion_id": "b34c9f97-471b-4d96-8e5b-e4f6ff9a4bb9",
+        "fuente": "ley_21442",
+        "score": 0.3290829658508301
+      },
+      {
+        "interaccion_id": "d0df2d1b-28c8-4f18-b88c-85cc332aaa7f",
+        "fuente": "ley_21442",
+        "score": 0.3483297824859619
+      },
+      {
+        "interaccion_id": "d0df2d1b-28c8-4f18-b88c-85cc332aaa7f",
+        "fuente": "ley_21442",
+        "score": 0.3343645930290222
+      },
+      {
+        "interaccion_id": "d0df2d1b-28c8-4f18-b88c-85cc332aaa7f",
+        "fuente": "ley_21442",
+        "score": 0.3290829658508301
+      },
+      {
+        "interaccion_id": "b6915747-cc5c-4e4b-8945-e6d07c5156db",
+        "fuente": "ley_21442",
+        "score": 0.3483297824859619
+      },
+      {
+        "interaccion_id": "b6915747-cc5c-4e4b-8945-e6d07c5156db",
+        "fuente": "ley_21442",
+        "score": 0.3343645930290222
+      }
+    ],
+    "n_fragmentos_score_bajo": 53,
+    "nodos_latencia_inestable": [
+      {
+        "nodo": "planificador",
+        "promedio_ms": 2666.6,
+        "desviacion_ms": 3761.6,
+        "coeficiente_variacion": 1.41
+      },
+      {
+        "nodo": "memoria",
+        "promedio_ms": 338.0,
+        "desviacion_ms": 1759.5,
+        "coeficiente_variacion": 5.21
+      },
+      {
+        "nodo": "auditoria",
+        "promedio_ms": 12364.0,
+        "desviacion_ms": 15122.2,
+        "coeficiente_variacion": 1.22
+      },
+      {
+        "nodo": "redaccion",
+        "promedio_ms": 3079.3,
+        "desviacion_ms": 5099.9,
+        "coeficiente_variacion": 1.66
+      },
+      {
+        "nodo": "finalizador",
+        "promedio_ms": 0.0,
+        "desviacion_ms": 0.1,
+        "coeficiente_variacion": 9.49
+      }
+    ]
+  },
+  "patrones": {
+    "por_categoria": {
+      "ascensor": {
+        "corridas": 1,
+        "con_error": 0,
+        "latencia_promedio_ms": 4280.0
+      },
+      "electricidad": {
+        "corridas": 16,
+        "con_error": 3,
+        "latencia_promedio_ms": 22508.8
+      },
+      "gas": {
+        "corridas": 2,
+        "con_error": 0,
+        "latencia_promedio_ms": 43118.5
+      },
+      "general": {
+        "corridas": 5,
+        "con_error": 0,
+        "latencia_promedio_ms": 11894.6
+      }
+    },
+    "veredictos_por_tipo_tarea": {
+      "auditoria": {
+        "alerta": 11,
+        "no_cumple": 5,
+        "(sin veredicto)": 2
+      },
+      "consulta_normativa": {
+        "(sin veredicto)": 6
+      }
+    },
+    "distribucion_estados_interacciones": {
+      "no_cumple": 34,
+      "alerta": 116,
+      "cumple": 9
+    }
+  },
+  "hallazgos": [
+    {
+      "tipo": "cuello_de_botella",
+      "titulo": "El nodo 'auditoria' concentra el 63% de la latencia del grafo",
+      "evidencia": {
+        "nombre": "auditoria",
+        "n": 77,
+        "total_ms": 952030,
+        "promedio_ms": 12364.0,
+        "p95_ms": 40089.0,
+        "proporcion": 0.628
+      }
+    },
+    {
+      "tipo": "cuello_de_botella",
+      "titulo": "Las llamadas al LLM representan el 96% de la latencia medida en nodos",
+      "evidencia": {
+        "latencia_llm_ms": 1454817,
+        "latencia_nodos_ms": 1515250,
+        "proporcion_llm": 0.96
+      }
+    },
+    {
+      "tipo": "degradacion",
+      "titulo": "9 llamadas al LLM degradaron a modo demo por error de la API",
+      "evidencia": [
+        {
+          "rol": "redaccion",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197373, Requested 4392. Please try again in 12m42.479999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "trace_id": "8be25efc-7a2f-4761-ad9e-d0b3bc9a4135"
+        },
+        {
+          "rol": "redaccion",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 197802, Requested 4356. Please try again in 15m32.256s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "trace_id": "1d1f2244-91de-42b3-9a50-1efa9905667a"
+        },
+        {
+          "rol": "redaccion",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198744, Requested 4356. Please try again in 22m19.2s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "trace_id": "f3721916-7e18-43a2-a7de-125cde860245"
+        },
+        {
+          "rol": "planificador",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198742, Requested 1963. Please try again in 5m4.56s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "trace_id": "b45d28ee-31e6-4243-9bf2-bb679d5cb1df"
+        },
+        {
+          "rol": "redaccion",
+          "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198740, Requested 5223. Please try again in 28m32.015999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+          "trace_id": "b45d28ee-31e6-4243-9bf2-bb679d5cb1df"
+        }
+      ]
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "2 corridas con latencia outlier (> media + 2 desviaciones)",
+      "evidencia": [
+        {
+          "trace_id": null,
+          "latencia_total_ms": 51843,
+          "umbral_ms": 51237.1
+        },
+        {
+          "trace_id": null,
+          "latencia_total_ms": 56447,
+          "umbral_ms": 51237.1
+        }
+      ]
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "53 fragmentos recuperados con score < 0.35 (baja confianza del retrieval)",
+      "evidencia": [
+        {
+          "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+          "fuente": "ley_21442",
+          "score": 0.32564252614974976
+        },
+        {
+          "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+          "fuente": "ley_21442",
+          "score": 0.2892141342163086
+        },
+        {
+          "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+          "fuente": "ley_21442",
+          "score": 0.28871047496795654
+        },
+        {
+          "interaccion_id": "06df90c8-4312-47f3-bfb2-9c5fee1c8a64",
+          "fuente": "ley_21442",
+          "score": 0.2755701541900635
+        },
+        {
+          "interaccion_id": "d2750927-be97-4f02-b683-09c927a1bedf",
+          "fuente": "ley_21442",
+          "score": 0.3483297824859619
+        }
+      ]
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "Latencia inestable en 'planificador' (coef. variacion 1.41)",
+      "evidencia": {
+        "nodo": "planificador",
+        "promedio_ms": 2666.6,
+        "desviacion_ms": 3761.6,
+        "coeficiente_variacion": 1.41
+      }
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "Latencia inestable en 'memoria' (coef. variacion 5.21)",
+      "evidencia": {
+        "nodo": "memoria",
+        "promedio_ms": 338.0,
+        "desviacion_ms": 1759.5,
+        "coeficiente_variacion": 5.21
+      }
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "Latencia inestable en 'auditoria' (coef. variacion 1.22)",
+      "evidencia": {
+        "nodo": "auditoria",
+        "promedio_ms": 12364.0,
+        "desviacion_ms": 15122.2,
+        "coeficiente_variacion": 1.22
+      }
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "Latencia inestable en 'redaccion' (coef. variacion 1.66)",
+      "evidencia": {
+        "nodo": "redaccion",
+        "promedio_ms": 3079.3,
+        "desviacion_ms": 5099.9,
+        "coeficiente_variacion": 1.66
+      }
+    },
+    {
+      "tipo": "anomalia",
+      "titulo": "Latencia inestable en 'finalizador' (coef. variacion 9.49)",
+      "evidencia": {
+        "nodo": "finalizador",
+        "promedio_ms": 0.0,
+        "desviacion_ms": 0.1,
+        "coeficiente_variacion": 9.49
+      }
+    },
+    {
+      "tipo": "patron",
+      "titulo": "La categoria 'electricidad' presenta 3 corridas con error de 16",
+      "evidencia": {
+        "corridas": 16,
+        "con_error": 3,
+        "latencia_promedio_ms": 22508.8
+      }
+    }
+  ],
+  "generado": "2026-11-26T15:19:21Z"
+}

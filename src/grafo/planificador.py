@@ -14,6 +14,7 @@ import re
 
 from src.agent.llm import generar
 from src.grafo.estado import PASOS_VALIDOS
+from src.observabilidad import trazas
 from src.util.json_utils import extraer_json
 
 logger = logging.getLogger(__name__)
@@ -67,6 +68,7 @@ def planificar(publicacion: str, categoria: str) -> tuple[str, list[dict]]:
             system=SYSTEM_PLANIFICADOR,
             user=f"Categoria: {categoria}\nPublicacion: {publicacion}",
             temperatura=0.0,
+            rol="planificador",
         )
         data = extraer_json(raw)
         tipo = data["tipo_tarea"]
@@ -76,6 +78,9 @@ def planificar(publicacion: str, categoria: str) -> tuple[str, list[dict]]:
         return tipo, plan
     except Exception as e:
         logger.warning("Planificador: LLM fallo (%s). Uso heuristica deterministica.", type(e).__name__)
+        trazas.registrar_evento(
+            "fallback", componente="planificador", detalle=f"{type(e).__name__}: {e}"
+        )
         return _plan_heuristico(publicacion, categoria)
 
 

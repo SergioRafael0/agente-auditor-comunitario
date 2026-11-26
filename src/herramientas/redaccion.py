@@ -7,6 +7,7 @@ import logging
 
 from src.agent.llm import generar
 from src.herramientas.prompts import SYSTEM_REDACCION, user_redaccion
+from src.observabilidad import trazas
 from src.util.json_utils import extraer_json
 
 logger = logging.getLogger(__name__)
@@ -37,12 +38,15 @@ def redactar(
         fragmentos=fragmentos,
         experiencias=experiencias,
     )
-    raw = generar(system=SYSTEM_REDACCION, user=user, temperatura=0.2)
+    raw = generar(system=SYSTEM_REDACCION, user=user, temperatura=0.2, rol="redaccion")
 
     try:
         data = extraer_json(raw)
     except json.JSONDecodeError:
         logger.warning("Redaccion: LLM no devolvio JSON valido. Raw: %s", raw[:200])
+        trazas.registrar_evento(
+            "fallback", componente="redaccion", detalle="JSON invalido del LLM"
+        )
         data = {}
     return {
         "modo": modo,

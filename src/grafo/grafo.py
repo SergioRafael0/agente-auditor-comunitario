@@ -25,12 +25,16 @@ from src.grafo.enrutador import enrutador, siguiente_nodo
 from src.grafo.estado import EstadoAgente
 from src.grafo.planificador import planificar
 from src.grafo.subagentes import NODOS_PASO
+from src.observabilidad import trazas
+from src.observabilidad.instrumentacion import nodo_instrumentado
+from src.util.privacidad import texto_para_log
 
 logger = logging.getLogger(__name__)
 
 NODO_FINALIZADOR = "finalizador"
 
 
+@nodo_instrumentado("planificador")
 def nodo_planificador(estado: EstadoAgente) -> dict:
     """Supervisor: decide tipo de tarea y construye el plan priorizado."""
     inicio = time.time()
@@ -49,6 +53,7 @@ def nodo_planificador(estado: EstadoAgente) -> dict:
     }
 
 
+@nodo_instrumentado("finalizador")
 def nodo_finalizador(estado: EstadoAgente) -> dict:
     """Compone la respuesta final (sin LLM: resumen deterministico y trazable)."""
     partes = ["# Respuesta del Agente Auditor Comunitario\n"]
@@ -120,6 +125,9 @@ def invocar_agente(
     thread_id agrupa la conversacion para la memoria de corto plazo:
     en turnos sucesivos con el mismo id, el estado (historial de
     veredictos, errores y obtencion) se preserva via checkpointer.
+
+    Cada ejecucion recibe un trace_id que correlaciona los eventos de
+    data/eventos.jsonl con este registro en data/agente_ejecuciones.jsonl.
     """
     load_dotenv()
     if checkpointer is None:
@@ -129,10 +137,11 @@ def invocar_agente(
 
     grafo = construir_grafo(checkpointer)
     tid = thread_id or str(uuid.uuid4())
+    traza = trazas.nueva_traza(tid)
 
     inicio = time.time()
     estado_final = grafo.invoke(
-        {"publicacion": texto, "categoria": categoria},
+        {"publicacion": texto, "categoria": categoria, "trace_id": traza, "thread_id": tid},
         config={"configurable": {"thread_id": tid}},
     )
     logger.info("Agente completo en %d ms (thread %s)", int((time.time() - inicio) * 1000), tid)
@@ -153,14 +162,20 @@ def _loggear_ejecucion(thread_id: str, estado: dict, latencia_ms: int) -> None:
         p.parent.mkdir(parents=True, exist_ok=True)
         registro = {
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "trace_id": estado.get("trace_id"),
             "thread_id": thread_id,
-            "input": {"texto": estado.get("publicacion", ""), "categoria": estado.get("categoria", "")},
+            "input": {
+                "texto": texto_para_log(estado.get("publicacion", "")),
+                "categoria": estado.get("categoria", ""),
+            },
             "tipo_tarea": estado.get("tipo_tarea", ""),
             "plan": [p_.get("nombre") for p_ in estado.get("plan", [])],
             "pasos_ejecutados": [e.get("paso") for e in estado.get("pasos_ejecutados", [])],
+            "pasos_detalle": estado.get("pasos_ejecutados", []),
             "errores": estado.get("errores", []),
             "veredicto": (estado.get("auditoria") or {}).get("estado"),
             "latencia_total_ms": latencia_ms,
+            "llm": trazas.resumen_llm(estado.get("trace_id")),
         }
         registro["bitacora"] = estado.get("bitacora", [])
         with p.open("a", encoding="utf-8") as f:
@@ -173,7 +188,7 @@ if __name__ == "__main__":
     import argparse
 
     load_dotenv()
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+    logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(asctime)s [%(levelname)s] %(message)s")
 
     parser = argparse.ArgumentParser(description="Ejecutar el agente desde CLI.")
     parser.add_argument("--texto", required=True)

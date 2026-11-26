@@ -137,7 +137,9 @@ def _agregar_overlap(chunks: list[str], overlap_tokens: int) -> list[str]:
 
 def _estimar_tokens(texto: str) -> int:
     """Estimacion grosera: 1 token ~ 0.75 palabras en espanol."""
-    return max(1, int(len(texto.split()) / 0.75))
+    from src.util.tokens import estimar_tokens
+
+    return estimar_tokens(texto)
 
 
 def adjuntar_metadata(

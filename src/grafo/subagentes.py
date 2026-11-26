@@ -3,20 +3,27 @@
 Cada subagente ejecuta UNA herramienta y actualiza el estado. Los errores
 se registran en `errores` para que el enrutador pueda reintentar o
 ajustar el plan (toma de decisiones adaptativa).
+
+Todos los nodos estan instrumentados (decorador `nodo_instrumentado`):
+cada paso deja su latencia en `pasos_ejecutados` y un evento en
+data/eventos.jsonl, y los fallos guardan el traceback completo.
 """
 
 from __future__ import annotations
 
 import logging
+import traceback
 
 from src.herramientas.consulta import buscar_normativa
 from src.herramientas.redaccion import redactar
 from src.herramientas.razonamiento import auditar
 from src.memoria.largo_plazo import buscar_experiencias, guardar_experiencia
+from src.observabilidad.instrumentacion import nodo_instrumentado
 
 logger = logging.getLogger(__name__)
 
 
+@nodo_instrumentado("memoria")
 def nodo_memoria(estado: dict) -> dict:
     """Subagente de memoria: carga experiencias previas similares."""
     texto = estado.get("publicacion", "")
@@ -36,6 +43,7 @@ def nodo_memoria(estado: dict) -> dict:
         return _error_paso("memoria", e)
 
 
+@nodo_instrumentado("consulta_normativa")
 def nodo_consulta_normativa(estado: dict) -> dict:
     """Subagente de consulta: busca normativa en el indice RAG."""
     try:
@@ -57,6 +65,7 @@ def nodo_consulta_normativa(estado: dict) -> dict:
         return _error_paso("consulta_normativa", e)
 
 
+@nodo_instrumentado("auditoria")
 def nodo_auditoria(estado: dict) -> dict:
     """Subagente auditor: evalua la publicacion contra la normativa."""
     try:
@@ -78,6 +87,7 @@ def nodo_auditoria(estado: dict) -> dict:
         return _error_paso("auditoria", e)
 
 
+@nodo_instrumentado("redaccion")
 def nodo_redaccion(estado: dict) -> dict:
     """Subagente redactor: redacta la salida final segun el tipo de tarea.
 
@@ -142,6 +152,7 @@ def nodo_redaccion(estado: dict) -> dict:
         return _error_paso("redaccion", e)
 
 
+@nodo_instrumentado("guardar_memoria")
 def nodo_guardar_memoria(estado: dict) -> dict:
     """Subagente de memoria (escritura): persiste la experiencia auditada."""
     auditoria = estado.get("auditoria")
@@ -204,7 +215,7 @@ def _es_publicacion_vaga(texto: str, auditoria: dict) -> bool:
 def _error_paso(paso: str, error: Exception) -> dict:
     logger.warning("Paso '%s' fallo: %s", paso, error)
     return {
-        "errores": [{"paso": paso, "error": str(error)}],
+        "errores": [{"paso": paso, "error": str(error), "traceback": traceback.format_exc()}],
         "pasos_ejecutados": [{"paso": paso, "ok": False}],
         "bitacora": [
             {

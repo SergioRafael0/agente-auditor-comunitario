@@ -88,3 +88,16 @@ def test_modo_demo_desactivado_con_api_key(monkeypatch):
     monkeypatch.setenv("GROQ_API_KEY", "gsk-valida")
     monkeypatch.delenv("LLM_MODO", raising=False)
     assert modo_demo() is False
+
+
+def test_simular_auditor_detecta_vaguedad_en_plantilla_real():
+    """Regresion: la vaguedad se evalua sobre la publicacion (campo Descripcion),
+    no sobre el prompt completo con contexto normativo."""
+    user = (
+        "Publicacion a auditar:\n\nCategoria: general\n"
+        "Descripcion: arreglar urgente\n\n"
+        "Normativa relevante recuperada del sistema:\n"
+        "Largo fragmento de normativa que no deberia volver vaga la publicacion.\n"
+    )
+    raw = simular(system="Eres un auditor normativo experto en legislacion chilena.", user=user)
+    assert json.loads(raw)["estado"] == "no_cumple"

@@ -25,11 +25,16 @@ data/chroma/
 data/chunks/
 data/interacciones.jsonl
 data/agente_ejecuciones.jsonl
+data/eventos.jsonl
+data/accesos.jsonl
 data/memoria/
+# Intermedio del benchmark (la evidencia es corridas.jsonl, metricas.json y analisis_logs.json)
+data/eval/ev3/agente_ejecuciones.jsonl
 
 # Tests
 .pytest_cache/
 .coverage
+coverage.xml
 htmlcov/
 .tox/
 .cache

@@ -1,0 +1,6 @@
+# Configuracion de cobertura (pytest --cov=src)
+[run]
+omit =
+    # Capa UI de Streamlit: se prueba manualmente y se evidencia con capturas
+    # del dashboard en el informe (IE4).
+    src/observabilidad/dashboard.py

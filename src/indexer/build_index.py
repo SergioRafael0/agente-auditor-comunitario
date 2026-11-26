@@ -86,7 +86,7 @@ def construir_indice(sobreescribir: bool = False) -> int:
 if __name__ == "__main__":
     import argparse
 
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+    logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), format="%(asctime)s [%(levelname)s] %(message)s")
 
     parser = argparse.ArgumentParser(description="Indexar normativa en Chroma.")
     parser.add_argument("--sobreescribir", action="store_true", help="Borra el indice previo antes de regenerar.")
