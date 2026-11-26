@@ -6,6 +6,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import time
 import uuid
 from pathlib import Path
@@ -15,10 +16,18 @@ from pydantic import BaseModel, Field
 from src.agent.llm import generar
 from src.agent.prompts import SYSTEM_AUDITOR, USER_TEMPLATE, few_shots_texto
 from src.observabilidad import trazas
-from src.retriever.search import buscar
+from src.retriever.search import buscar, filtrar_confiables
 from src.util.privacidad import texto_para_log
 
 logger = logging.getLogger(__name__)
+
+PATRON_INYECCION = re.compile(
+    r"ignora\s+(?:todas\s+)?(?:tus|las)\s+instrucciones"
+    r"|olvida\s+(?:tus|las)\s+instrucciones"
+    r"|responde\s+(?:solo|unicamente|únicamente)"
+    r"|no\s+sigas\s+(?:estas|tus|las)\s+(?:reglas|instrucciones)",
+    re.IGNORECASE,
+)
 
 
 class Alerta(BaseModel):
@@ -44,7 +53,15 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
     """
     inicio = time.time()
     trace = trazas.asegurar_traza()
-    fragmentos = buscar(texto, categoria=categoria, top_k=5)
+    recuperados = buscar(texto, categoria=categoria, top_k=5)
+    fragmentos = filtrar_confiables(recuperados)
+    descartados = len(recuperados) - len(fragmentos)
+    if descartados:
+        trazas.registrar_evento(
+            "retrieval_filtrado",
+            descartados=descartados,
+            scores_descartados=[round(f.get("score") or 0.0, 3) for f in recuperados if f not in fragmentos],
+        )
 
     contexto_partes = []
     for frag in fragmentos:
@@ -53,12 +70,17 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
             cab += f" - {frag['articulo']}"
         cab += "]"
         contexto_partes.append(f"{cab}\n{frag['texto']}")
-    contexto = "\n\n---\n\n".join(contexto_partes) if contexto_partes else "(sin contexto recuperado)"
+    if contexto_partes:
+        contexto = "\n\n---\n\n".join(contexto_partes)
+    elif recuperados:
+        contexto = "(sin contexto recuperado: los fragmentos no superan el umbral de confianza)"
+    else:
+        contexto = "(sin contexto recuperado)"
 
     user_msg = USER_TEMPLATE.format(texto=texto, categoria=categoria, contexto=contexto)
     system_msg = SYSTEM_AUDITOR + few_shots_texto()
 
-    respuesta_llm = generar(system=system_msg, user=user_msg, rol="auditor")
+    respuesta_llm = generar(system=system_msg, user=user_msg, rol="auditor", temperatura=0.0)
 
     try:
         data = json.loads(respuesta_llm)
@@ -77,6 +99,16 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
                 )
             ],
         )
+
+    if _es_intento_de_inyeccion(texto):
+        degradado = resultado.estado == "cumple"
+        trazas.registrar_evento(
+            "inyeccion_detectada",
+            estado_original=resultado.estado,
+            accion="degradado_a_alerta" if degradado else "solo_registrado",
+        )
+        if degradado:
+            resultado = _alerta_por_inyeccion(resultado)
 
     latencia_ms = int((time.time() - inicio) * 1000)
     interaccion_id = str(uuid.uuid4())
@@ -112,6 +144,30 @@ def auditar_publicacion(texto: str, categoria: str) -> dict:
     )
 
     return resultado_dict
+
+
+def _es_intento_de_inyeccion(texto: str) -> bool:
+    """Detecta patrones de prompt-injection en el texto de la publicacion."""
+    return bool(PATRON_INYECCION.search(texto))
+
+
+def _alerta_por_inyeccion(resultado: ResultadoAuditoria) -> ResultadoAuditoria:
+    """Guard determinista anti-manipulacion.
+
+    Un 'cumple' ante un intento de inyeccion no es confiable: se degrada a
+    'alerta' y se agrega una alerta de sistema para revision humana.
+    """
+    alerta = Alerta(
+        fuente="Sistema",
+        articulo="-",
+        mensaje="La publicacion contiene instrucciones que intentan manipular la respuesta del agente.",
+        recomendacion="Revisar manualmente la publicacion antes de darla por cumplida.",
+    )
+    return ResultadoAuditoria(
+        estado="alerta",
+        alertas=[alerta, *resultado.alertas],
+        recomendaciones_generales=resultado.recomendaciones_generales,
+    )
 
 
 def _loggear_interaccion(registro: dict) -> None:

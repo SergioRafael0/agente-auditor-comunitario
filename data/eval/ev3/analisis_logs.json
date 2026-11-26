@@ -2,7 +2,7 @@
   "fuentes": {
     "eventos": {
       "ruta": "data/eventos.jsonl",
-      "n": 791
+      "n": 1461
     },
     "ejecuciones": {
       "ruta": "data/agente_ejecuciones.jsonl",
@@ -10,62 +10,62 @@
     },
     "interacciones": {
       "ruta": "data/interacciones.jsonl",
-      "n": 159
+      "n": 215
     }
   },
   "cuellos_de_botella": {
     "por_nodo": [
       {
         "nombre": "auditoria",
-        "n": 77,
-        "total_ms": 952030,
-        "promedio_ms": 12364.0,
-        "p95_ms": 40089.0,
-        "proporcion": 0.628
+        "n": 132,
+        "total_ms": 2245151,
+        "promedio_ms": 17008.7,
+        "p95_ms": 61307.05,
+        "proporcion": 0.504
       },
       {
         "nombre": "redaccion",
-        "n": 91,
-        "total_ms": 280212,
-        "promedio_ms": 3079.3,
-        "p95_ms": 12876.5,
-        "proporcion": 0.185
+        "n": 156,
+        "total_ms": 1864774,
+        "promedio_ms": 11953.7,
+        "p95_ms": 61894.5,
+        "proporcion": 0.418
       },
       {
         "nombre": "planificador",
-        "n": 91,
-        "total_ms": 242663,
-        "promedio_ms": 2666.6,
-        "p95_ms": 9806.5,
-        "proporcion": 0.16
+        "n": 156,
+        "total_ms": 276621,
+        "promedio_ms": 1773.2,
+        "p95_ms": 8772.5,
+        "proporcion": 0.062
       },
       {
         "nombre": "memoria",
-        "n": 91,
-        "total_ms": 30755,
-        "promedio_ms": 338.0,
-        "p95_ms": 158.5,
-        "proporcion": 0.02
+        "n": 156,
+        "total_ms": 55792,
+        "promedio_ms": 357.6,
+        "p95_ms": 157.75,
+        "proporcion": 0.013
       },
       {
         "nombre": "guardar_memoria",
-        "n": 77,
-        "total_ms": 8731,
-        "promedio_ms": 113.4,
-        "p95_ms": 220.40000000000003,
-        "proporcion": 0.006
+        "n": 132,
+        "total_ms": 12794,
+        "promedio_ms": 96.9,
+        "p95_ms": 188.54999999999978,
+        "proporcion": 0.003
       },
       {
         "nombre": "consulta_normativa",
-        "n": 14,
-        "total_ms": 858,
-        "promedio_ms": 61.3,
-        "p95_ms": 112.49999999999999,
-        "proporcion": 0.001
+        "n": 24,
+        "total_ms": 1375,
+        "promedio_ms": 57.3,
+        "p95_ms": 96.69999999999999,
+        "proporcion": 0.0
       },
       {
         "nombre": "finalizador",
-        "n": 91,
+        "n": 156,
         "total_ms": 1,
         "promedio_ms": 0.0,
         "p95_ms": 0.0,
@@ -75,39 +75,55 @@
     "por_rol_llm": [
       {
         "nombre": "auditor",
-        "n": 77,
-        "total_ms": 932191,
-        "promedio_ms": 12106.4,
-        "p95_ms": 40014.4,
-        "proporcion": 0.641
+        "n": 133,
+        "total_ms": 2285848,
+        "promedio_ms": 17186.8,
+        "p95_ms": 61259.0,
+        "proporcion": 0.516
       },
       {
         "nombre": "redaccion",
-        "n": 91,
-        "total_ms": 280076,
-        "promedio_ms": 3077.8,
-        "p95_ms": 12873.0,
-        "proporcion": 0.193
+        "n": 156,
+        "total_ms": 1864547,
+        "promedio_ms": 11952.2,
+        "p95_ms": 61894.0,
+        "proporcion": 0.421
       },
       {
         "nombre": "planificador",
-        "n": 91,
-        "total_ms": 242550,
-        "promedio_ms": 2665.4,
-        "p95_ms": 9805.5,
-        "proporcion": 0.167
+        "n": 156,
+        "total_ms": 276389,
+        "promedio_ms": 1771.7,
+        "p95_ms": 8770.75,
+        "proporcion": 0.062
       }
     ],
     "cuello_de_botella_principal": "auditoria",
     "llm_vs_resto": {
-      "latencia_llm_ms": 1454817,
-      "latencia_nodos_ms": 1515250,
-      "proporcion_llm": 0.96
+      "latencia_llm_ms": 4426784,
+      "latencia_nodos_ms": 4456508,
+      "proporcion_llm": 0.993
     }
   },
   "puntos_de_falla": {
     "fallos_por_nodo": {},
-    "fallbacks": [],
+    "fallbacks": [
+      {
+        "componente": "auditor",
+        "detalle": "JSON invalido: JSONDecodeError: Unterminated string starting at: line 14 column 24 (char 694)",
+        "trace_id": "2b781398-fe77-45ab-a1e8-fec586def279"
+      },
+      {
+        "componente": "planificador",
+        "detalle": "JSONDecodeError: Expecting ',' delimiter: line 13 column 6 (char 369)",
+        "trace_id": "3ad1f9e1-6ef0-455a-a643-488239440b97"
+      },
+      {
+        "componente": "planificador",
+        "detalle": "JSONDecodeError: sin objeto JSON en la respuesta: line 1 column 1 (char 0)",
+        "trace_id": "8515a126-38c0-4406-843d-a037177a456f"
+      }
+    ],
     "llamadas_degradadas": [
       {
         "rol": "redaccion",
@@ -153,6 +169,221 @@
         "rol": "redaccion",
         "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198732, Requested 4969. Please try again in 26m38.832s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
         "trace_id": "f564a3d4-1656-49c2-ad6e-62f6309cbf92"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199594, Requested 1725. Please try again in 9m29.808s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "2b781398-fe77-45ab-a1e8-fec586def279"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199449, Requested 5078. Please try again in 32m35.664s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "25c591cd-6115-4bf3-9f9e-c835e2c8d2d3"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199308, Requested 1930. Please try again in 8m54.816s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "25c591cd-6115-4bf3-9f9e-c835e2c8d2d3"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199163, Requested 5263. Please try again in 31m52.032s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "28e28a89-6139-464f-8a03-e00932873db5"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199022, Requested 1871. Please try again in 6m25.776s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "28e28a89-6139-464f-8a03-e00932873db5"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198878, Requested 4640. Please try again in 25m19.776s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "e7827630-9a24-43d7-9457-044715db4637"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199856, Requested 4234. Please try again in 29m26.88s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "d69f6be3-26eb-4de8-bdad-bc0a15139acc"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199714, Requested 1230. Please try again in 6m47.808s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "d69f6be3-26eb-4de8-bdad-bc0a15139acc"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199569, Requested 4163. Please try again in 26m52.224s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "9d8a960d-bdd5-4936-b81f-983119145935"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199427, Requested 1229. Please try again in 4m43.392s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "9d8a960d-bdd5-4936-b81f-983119145935"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199282, Requested 2323. Please try again in 11m33.359999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "2fee77d2-213f-4ab1-8420-e4c836fca55f"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199141, Requested 1253. Please try again in 2m50.208s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "2fee77d2-213f-4ab1-8420-e4c836fca55f"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198995, Requested 1941. Please try again in 6m44.352s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "5cf26662-ddcd-451c-8db8-a1fce378f64a"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198853, Requested 1613. Please try again in 3m21.312s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "5cf26662-ddcd-451c-8db8-a1fce378f64a"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198708, Requested 3485. Please try again in 15m47.376s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "8e8b53c3-5fab-4f02-86bc-86f106f325d2"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199629, Requested 3220. Please try again in 20m30.768s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "8f151495-1f7e-440a-a7c0-38ff10ae6167"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199488, Requested 1152. Please try again in 4m36.48s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "8f151495-1f7e-440a-a7c0-38ff10ae6167"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199342, Requested 4384. Please try again in 26m49.632s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "0d571b90-5f32-4f81-b570-290d929ef0e2"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199201, Requested 1060. Please try again in 1m52.752s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "0d571b90-5f32-4f81-b570-290d929ef0e2"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199056, Requested 4429. Please try again in 25m5.52s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "2fdefa82-a778-4fa6-90ff-9bbfa834ecd5"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199854, Requested 4736. Please try again in 33m2.88s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "23df45ad-99ea-4ee3-a2b7-5bb10b1549ff"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199712, Requested 1270. Please try again in 7m4.224s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "23df45ad-99ea-4ee3-a2b7-5bb10b1549ff"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199567, Requested 4714. Please try again in 30m49.392s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "2ea6a30d-7bcd-4439-817b-3907b24148f5"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199426, Requested 1201. Please try again in 4m30.864s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "2ea6a30d-7bcd-4439-817b-3907b24148f5"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199280, Requested 5109. Please try again in 31m36.048s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "67961843-ee15-4b66-baa3-4242b8b63ff2"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199139, Requested 1823. Please try again in 6m55.584s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "67961843-ee15-4b66-baa3-4242b8b63ff2"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198993, Requested 5152. Please try again in 29m50.64s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "bc282ff5-8566-4afd-8b51-a310a02b151d"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198852, Requested 1720. Please try again in 4m7.104s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "bc282ff5-8566-4afd-8b51-a310a02b151d"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198706, Requested 4755. Please try again in 24m55.152s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "3ad1f9e1-6ef0-455a-a643-488239440b97"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199570, Requested 4732. Please try again in 30m58.464s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "8515a126-38c0-4406-843d-a037177a456f"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199428, Requested 1686. Please try again in 8m1.248s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "8515a126-38c0-4406-843d-a037177a456f"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199283, Requested 3566. Please try again in 20m30.768s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "10746aca-72cf-4450-82e6-ae9e48eee4a5"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199142, Requested 1348. Please try again in 3m31.68s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "10746aca-72cf-4450-82e6-ae9e48eee4a5"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198997, Requested 3524. Please try again in 18m9.071999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "c87198e8-2978-430e-8f0a-16b799aa55f8"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198856, Requested 1328. Please try again in 1m19.488s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "c87198e8-2978-430e-8f0a-16b799aa55f8"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198710, Requested 2215. Please try again in 6m39.599999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "3ae45a5c-11cb-4ff9-a279-54e4a4d36ec8"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199854, Requested 2586. Please try again in 17m34.08s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "1365085b-b306-4937-a729-8771475704aa"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199710, Requested 1345. Please try again in 7m35.76s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "1365085b-b306-4937-a729-8771475704aa"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199563, Requested 3955. Please try again in 25m19.776s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "adb2924a-e753-4a47-af1c-50ee53161418"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199415, Requested 3955. Please try again in 24m15.84s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "d7a621dc-2ae1-48f0-a909-ba1747149ae7"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199268, Requested 4568. Please try again in 27m37.151999999s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "666f93ea-1cc8-4127-9bd9-05b0b98dc5bb"
+      },
+      {
+        "rol": "redaccion",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 199120, Requested 4325. Please try again in 24m48.24s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "6a14e369-c34d-4b70-bdae-f6718c330806"
+      },
+      {
+        "rol": "auditor",
+        "error": "RateLimitError: Error code: 429 - {'error': {'message': 'Rate limit reached for model `openai/gpt-oss-120b` in organization `org_01m24a580wehrvxqdx1q69dzyg` service tier `on_demand` on tokens per day (TPD): Limit 200000, Used 198796, Requested 4864. Please try again in 26m21.12s. Need more tokens? Upgrade to Dev Tier today at https://console.groq.com/settings/billing', 'type': 'tokens', 'code': 'rate_limit_exceeded'}}",
+        "trace_id": "05ba7915-d8c5-4d9e-85da-9c209c8def9b"
       }
     ],
     "reintentos": [],
@@ -313,33 +544,33 @@
     "nodos_latencia_inestable": [
       {
         "nodo": "planificador",
-        "promedio_ms": 2666.6,
-        "desviacion_ms": 3761.6,
-        "coeficiente_variacion": 1.41
+        "promedio_ms": 1773.2,
+        "desviacion_ms": 3091.1,
+        "coeficiente_variacion": 1.74
       },
       {
         "nodo": "memoria",
-        "promedio_ms": 338.0,
-        "desviacion_ms": 1759.5,
-        "coeficiente_variacion": 5.21
+        "promedio_ms": 357.6,
+        "desviacion_ms": 1819.8,
+        "coeficiente_variacion": 5.09
       },
       {
         "nodo": "auditoria",
-        "promedio_ms": 12364.0,
-        "desviacion_ms": 15122.2,
-        "coeficiente_variacion": 1.22
+        "promedio_ms": 17008.7,
+        "desviacion_ms": 23043.5,
+        "coeficiente_variacion": 1.35
       },
       {
         "nodo": "redaccion",
-        "promedio_ms": 3079.3,
-        "desviacion_ms": 5099.9,
-        "coeficiente_variacion": 1.66
+        "promedio_ms": 11953.7,
+        "desviacion_ms": 22900.6,
+        "coeficiente_variacion": 1.92
       },
       {
         "nodo": "finalizador",
         "promedio_ms": 0.0,
         "desviacion_ms": 0.1,
-        "coeficiente_variacion": 9.49
+        "coeficiente_variacion": 12.45
       }
     ]
   },
@@ -377,36 +608,57 @@
       }
     },
     "distribucion_estados_interacciones": {
-      "no_cumple": 34,
-      "alerta": 116,
+      "no_cumple": 45,
+      "alerta": 161,
       "cumple": 9
     }
   },
   "hallazgos": [
     {
       "tipo": "cuello_de_botella",
-      "titulo": "El nodo 'auditoria' concentra el 63% de la latencia del grafo",
+      "titulo": "El nodo 'auditoria' concentra el 50% de la latencia del grafo",
       "evidencia": {
         "nombre": "auditoria",
-        "n": 77,
-        "total_ms": 952030,
-        "promedio_ms": 12364.0,
-        "p95_ms": 40089.0,
-        "proporcion": 0.628
+        "n": 132,
+        "total_ms": 2245151,
+        "promedio_ms": 17008.7,
+        "p95_ms": 61307.05,
+        "proporcion": 0.504
       }
     },
     {
       "tipo": "cuello_de_botella",
-      "titulo": "Las llamadas al LLM representan el 96% de la latencia medida en nodos",
+      "titulo": "Las llamadas al LLM representan el 99% de la latencia medida en nodos",
       "evidencia": {
-        "latencia_llm_ms": 1454817,
-        "latencia_nodos_ms": 1515250,
-        "proporcion_llm": 0.96
+        "latencia_llm_ms": 4426784,
+        "latencia_nodos_ms": 4456508,
+        "proporcion_llm": 0.993
       }
     },
     {
       "tipo": "degradacion",
-      "titulo": "9 llamadas al LLM degradaron a modo demo por error de la API",
+      "titulo": "Se activaron 3 fallbacks: {'auditor': 1, 'planificador': 2}",
+      "evidencia": [
+        {
+          "componente": "auditor",
+          "detalle": "JSON invalido: JSONDecodeError: Unterminated string starting at: line 14 column 24 (char 694)",
+          "trace_id": "2b781398-fe77-45ab-a1e8-fec586def279"
+        },
+        {
+          "componente": "planificador",
+          "detalle": "JSONDecodeError: Expecting ',' delimiter: line 13 column 6 (char 369)",
+          "trace_id": "3ad1f9e1-6ef0-455a-a643-488239440b97"
+        },
+        {
+          "componente": "planificador",
+          "detalle": "JSONDecodeError: sin objeto JSON en la respuesta: line 1 column 1 (char 0)",
+          "trace_id": "8515a126-38c0-4406-843d-a037177a456f"
+        }
+      ]
+    },
+    {
+      "tipo": "degradacion",
+      "titulo": "52 llamadas al LLM degradaron a modo demo por error de la API",
       "evidencia": [
         {
           "rol": "redaccion",
@@ -484,52 +736,52 @@
     },
     {
       "tipo": "anomalia",
-      "titulo": "Latencia inestable en 'planificador' (coef. variacion 1.41)",
+      "titulo": "Latencia inestable en 'planificador' (coef. variacion 1.74)",
       "evidencia": {
         "nodo": "planificador",
-        "promedio_ms": 2666.6,
-        "desviacion_ms": 3761.6,
-        "coeficiente_variacion": 1.41
+        "promedio_ms": 1773.2,
+        "desviacion_ms": 3091.1,
+        "coeficiente_variacion": 1.74
       }
     },
     {
       "tipo": "anomalia",
-      "titulo": "Latencia inestable en 'memoria' (coef. variacion 5.21)",
+      "titulo": "Latencia inestable en 'memoria' (coef. variacion 5.09)",
       "evidencia": {
         "nodo": "memoria",
-        "promedio_ms": 338.0,
-        "desviacion_ms": 1759.5,
-        "coeficiente_variacion": 5.21
+        "promedio_ms": 357.6,
+        "desviacion_ms": 1819.8,
+        "coeficiente_variacion": 5.09
       }
     },
     {
       "tipo": "anomalia",
-      "titulo": "Latencia inestable en 'auditoria' (coef. variacion 1.22)",
+      "titulo": "Latencia inestable en 'auditoria' (coef. variacion 1.35)",
       "evidencia": {
         "nodo": "auditoria",
-        "promedio_ms": 12364.0,
-        "desviacion_ms": 15122.2,
-        "coeficiente_variacion": 1.22
+        "promedio_ms": 17008.7,
+        "desviacion_ms": 23043.5,
+        "coeficiente_variacion": 1.35
       }
     },
     {
       "tipo": "anomalia",
-      "titulo": "Latencia inestable en 'redaccion' (coef. variacion 1.66)",
+      "titulo": "Latencia inestable en 'redaccion' (coef. variacion 1.92)",
       "evidencia": {
         "nodo": "redaccion",
-        "promedio_ms": 3079.3,
-        "desviacion_ms": 5099.9,
-        "coeficiente_variacion": 1.66
+        "promedio_ms": 11953.7,
+        "desviacion_ms": 22900.6,
+        "coeficiente_variacion": 1.92
       }
     },
     {
       "tipo": "anomalia",
-      "titulo": "Latencia inestable en 'finalizador' (coef. variacion 9.49)",
+      "titulo": "Latencia inestable en 'finalizador' (coef. variacion 12.45)",
       "evidencia": {
         "nodo": "finalizador",
         "promedio_ms": 0.0,
         "desviacion_ms": 0.1,
-        "coeficiente_variacion": 9.49
+        "coeficiente_variacion": 12.45
       }
     },
     {
@@ -542,5 +794,5 @@
       }
     }
   ],
-  "generado": "2026-11-26T15:19:21Z"
+  "generado": "2026-11-26T16:43:27Z"
 }

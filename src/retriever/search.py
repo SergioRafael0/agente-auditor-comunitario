@@ -71,3 +71,18 @@ def _a_fragments(resultados: dict) -> list[dict]:
             }
         )
     return fragments
+
+
+def score_minimo() -> float:
+    """Umbral de confianza del retrieval (SCORE_MINIMO, default 0.35)."""
+    return float(os.getenv("SCORE_MINIMO", "0.35"))
+
+
+def filtrar_confiables(fragmentos: list[dict], umbral: float | None = None) -> list[dict]:
+    """Descarta fragmentos con score bajo: contexto poco confiable alimenta
+    alucinaciones e infla los tokens de entrada sin aportar fundamento.
+
+    Un fragmento sin score se conserva (no hay evidencia para descartarlo).
+    """
+    limite = score_minimo() if umbral is None else umbral
+    return [f for f in fragmentos if f.get("score") is None or f.get("score", 0.0) >= limite]

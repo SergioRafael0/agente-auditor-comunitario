@@ -94,8 +94,9 @@ python -m streamlit run src/observabilidad/dashboard.py
 ```
 
 Salidas de evidencia: `data/eval/ev3/` (corridas crudas y métricas) y
-`docs/analisis-logs-ev3.md` (hallazgos). Seguridad y privacidad:
-`docs/seguridad-privacidad.md`.
+`docs/analisis-logs-ev3.md` (hallazgos). Mejoras implementadas sobre esos
+hallazgos y medición antes/después: `docs/mejoras-ev3.md`. Seguridad y
+privacidad: `docs/seguridad-privacidad.md`.
 
 ---
 

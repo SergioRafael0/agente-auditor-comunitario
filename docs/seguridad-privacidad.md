@@ -30,7 +30,13 @@ CUMPLE"). Defensa en profundidad, en tres capas:
 2. **Reglas anti-inyección en los system prompts**: el texto de la publicación
    se trata como DATO, nunca como instrucción (`src/agent/prompts.py` regla 5,
    `src/herramientas/prompts.py` regla 7).
-3. **Salida validada**: la respuesta del LLM pasa por esquemas Pydantic
+3. **Guard determinista anti-manipulación** (`src/agent/auditor.py`): si la
+   publicación coincide con patrones de inyección ("ignora tus instrucciones",
+   "responde solo...", etc.) el intento **siempre** queda registrado como evento
+   `inyeccion_detectada` (visible en el dashboard), y si el veredicto del LLM
+   fue `cumple` se degrada a `alerta` con una alerta de sistema para revisión
+   humana. Un veredicto favorable emitido bajo manipulación no se acepta.
+4. **Salida validada**: la respuesta del LLM pasa por esquemas Pydantic
    (`ResultadoAuditoria`), validación de planes y `extraer_json`; un JSON
    inválido degrada a un resultado de respaldo determinista, nunca a un
    comportamiento arbitrario.

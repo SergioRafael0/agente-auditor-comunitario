@@ -1,0 +1,541 @@
+{
+  "generado": "2026-11-26T16:43:24Z",
+  "configuracion": {
+    "modos": [
+      "demo"
+    ],
+    "repeticiones_por_escenario": [
+      1,
+      2,
+      3
+    ],
+    "n_escenarios": 13,
+    "n_corridas": 39
+  },
+  "global": {
+    "precision": {
+      "n": 39,
+      "aciertos": 39,
+      "precision": 1.0,
+      "por_variabilidad": {
+        "adversarial": {
+          "n": 3,
+          "aciertos": 3,
+          "precision": 1.0
+        },
+        "ambigua": {
+          "n": 3,
+          "aciertos": 3,
+          "precision": 1.0
+        },
+        "categoria_desconocida": {
+          "n": 3,
+          "aciertos": 3,
+          "precision": 1.0
+        },
+        "completa": {
+          "n": 9,
+          "aciertos": 9,
+          "precision": 1.0
+        },
+        "consulta": {
+          "n": 6,
+          "aciertos": 6,
+          "precision": 1.0
+        },
+        "larga": {
+          "n": 3,
+          "aciertos": 3,
+          "precision": 1.0
+        },
+        "ruidosa": {
+          "n": 3,
+          "aciertos": 3,
+          "precision": 1.0
+        },
+        "simple": {
+          "n": 3,
+          "aciertos": 3,
+          "precision": 1.0
+        },
+        "vaga": {
+          "n": 6,
+          "aciertos": 6,
+          "precision": 1.0
+        }
+      }
+    },
+    "consistencia": {
+      "n_escenarios": 13,
+      "escenarios_estables": 13,
+      "consistencia_global": 1.0,
+      "por_escenario": {
+        "adversarial_prompt_injection": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "ambigua_areas_comunes": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "caldera_gas": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "categoria_desconocida": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "consulta_normativa_ascensor": {
+          "n": 3,
+          "veredictos": {
+            "consulta_normativa": 3
+          },
+          "veredicto_modal": "consulta_normativa",
+          "estable": true
+        },
+        "consulta_normativa_sec": {
+          "n": 3,
+          "veredictos": {
+            "consulta_normativa": 3
+          },
+          "veredicto_modal": "consulta_normativa",
+          "estable": true
+        },
+        "descripcion_larga": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "mantencion_ascensor": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "pintura_simple": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "publicacion_vaga": {
+          "n": 3,
+          "veredictos": {
+            "no_cumple": 3
+          },
+          "veredicto_modal": "no_cumple",
+          "estable": true
+        },
+        "ruido_formato": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        },
+        "texto_muy_corto": {
+          "n": 3,
+          "veredictos": {
+            "no_cumple": 3
+          },
+          "veredicto_modal": "no_cumple",
+          "estable": true
+        },
+        "trabajo_completo_electricidad": {
+          "n": 3,
+          "veredictos": {
+            "alerta": 3
+          },
+          "veredicto_modal": "alerta",
+          "estable": true
+        }
+      }
+    },
+    "errores": {
+      "nodos_ejecutados": 228,
+      "nodos_fallidos": 0,
+      "fallos_por_nodo": {},
+      "fallbacks_por_componente": {},
+      "llamadas_llm_degradadas": 0,
+      "corridas_con_error": 0,
+      "tasa_corridas_con_error": 0.0
+    },
+    "latencia": {
+      "latencia_total_ms": {
+        "n": 39,
+        "promedio": 456.2,
+        "p50": 159.0,
+        "p95": 335.0000000000002,
+        "max": 10958
+      },
+      "por_nodo": {
+        "auditoria": {
+          "ejecuciones": 33,
+          "promedio_ms": 49.7,
+          "p95_ms": 83.19999999999996
+        },
+        "consulta_normativa": {
+          "ejecuciones": 6,
+          "promedio_ms": 36.7,
+          "p95_ms": 39.0
+        },
+        "finalizador": {
+          "ejecuciones": 39,
+          "promedio_ms": 0.0,
+          "p95_ms": 0.0
+        },
+        "guardar_memoria": {
+          "ejecuciones": 33,
+          "promedio_ms": 56.0,
+          "p95_ms": 84.4
+        },
+        "memoria": {
+          "ejecuciones": 39,
+          "promedio_ms": 302.9,
+          "p95_ms": 101.40000000000002
+        },
+        "planificador": {
+          "ejecuciones": 39,
+          "promedio_ms": 1.2,
+          "p95_ms": 3.0
+        },
+        "redaccion": {
+          "ejecuciones": 39,
+          "promedio_ms": 1.4,
+          "p95_ms": 2.0
+        }
+      },
+      "por_rol_llm": {
+        "auditor": {
+          "llamadas": 33,
+          "promedio_ms": 0.9,
+          "p95_ms": 3.5999999999999943
+        },
+        "planificador": {
+          "llamadas": 39,
+          "promedio_ms": 0.0,
+          "p95_ms": 0.0
+        },
+        "redaccion": {
+          "llamadas": 39,
+          "promedio_ms": 0.3,
+          "p95_ms": 2.0
+        }
+      }
+    },
+    "recursos": {
+      "llamadas_llm": 111,
+      "tokens_entrada_total": 149355,
+      "tokens_salida_total": 12066,
+      "tokens_total": 161421,
+      "tokens_promedio_por_llamada": 1454.2,
+      "proporcion_tokens_estimados": 1.0,
+      "por_rol": {
+        "planificador": {
+          "llamadas": 39,
+          "tokens_entrada": 15270,
+          "tokens_salida": 2868
+        },
+        "auditor": {
+          "llamadas": 33,
+          "tokens_entrada": 93834,
+          "tokens_salida": 4767
+        },
+        "redaccion": {
+          "llamadas": 39,
+          "tokens_entrada": 40251,
+          "tokens_salida": 4431
+        }
+      }
+    }
+  },
+  "por_modo": {
+    "demo": {
+      "precision": {
+        "n": 39,
+        "aciertos": 39,
+        "precision": 1.0,
+        "por_variabilidad": {
+          "adversarial": {
+            "n": 3,
+            "aciertos": 3,
+            "precision": 1.0
+          },
+          "ambigua": {
+            "n": 3,
+            "aciertos": 3,
+            "precision": 1.0
+          },
+          "categoria_desconocida": {
+            "n": 3,
+            "aciertos": 3,
+            "precision": 1.0
+          },
+          "completa": {
+            "n": 9,
+            "aciertos": 9,
+            "precision": 1.0
+          },
+          "consulta": {
+            "n": 6,
+            "aciertos": 6,
+            "precision": 1.0
+          },
+          "larga": {
+            "n": 3,
+            "aciertos": 3,
+            "precision": 1.0
+          },
+          "ruidosa": {
+            "n": 3,
+            "aciertos": 3,
+            "precision": 1.0
+          },
+          "simple": {
+            "n": 3,
+            "aciertos": 3,
+            "precision": 1.0
+          },
+          "vaga": {
+            "n": 6,
+            "aciertos": 6,
+            "precision": 1.0
+          }
+        }
+      },
+      "consistencia": {
+        "n_escenarios": 13,
+        "escenarios_estables": 13,
+        "consistencia_global": 1.0,
+        "por_escenario": {
+          "adversarial_prompt_injection": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "ambigua_areas_comunes": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "caldera_gas": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "categoria_desconocida": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "consulta_normativa_ascensor": {
+            "n": 3,
+            "veredictos": {
+              "consulta_normativa": 3
+            },
+            "veredicto_modal": "consulta_normativa",
+            "estable": true
+          },
+          "consulta_normativa_sec": {
+            "n": 3,
+            "veredictos": {
+              "consulta_normativa": 3
+            },
+            "veredicto_modal": "consulta_normativa",
+            "estable": true
+          },
+          "descripcion_larga": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "mantencion_ascensor": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "pintura_simple": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "publicacion_vaga": {
+            "n": 3,
+            "veredictos": {
+              "no_cumple": 3
+            },
+            "veredicto_modal": "no_cumple",
+            "estable": true
+          },
+          "ruido_formato": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          },
+          "texto_muy_corto": {
+            "n": 3,
+            "veredictos": {
+              "no_cumple": 3
+            },
+            "veredicto_modal": "no_cumple",
+            "estable": true
+          },
+          "trabajo_completo_electricidad": {
+            "n": 3,
+            "veredictos": {
+              "alerta": 3
+            },
+            "veredicto_modal": "alerta",
+            "estable": true
+          }
+        }
+      },
+      "errores": {
+        "nodos_ejecutados": 228,
+        "nodos_fallidos": 0,
+        "fallos_por_nodo": {},
+        "fallbacks_por_componente": {},
+        "llamadas_llm_degradadas": 0,
+        "corridas_con_error": 0,
+        "tasa_corridas_con_error": 0.0
+      },
+      "latencia": {
+        "latencia_total_ms": {
+          "n": 39,
+          "promedio": 456.2,
+          "p50": 159.0,
+          "p95": 335.0000000000002,
+          "max": 10958
+        },
+        "por_nodo": {
+          "auditoria": {
+            "ejecuciones": 33,
+            "promedio_ms": 49.7,
+            "p95_ms": 83.19999999999996
+          },
+          "consulta_normativa": {
+            "ejecuciones": 6,
+            "promedio_ms": 36.7,
+            "p95_ms": 39.0
+          },
+          "finalizador": {
+            "ejecuciones": 39,
+            "promedio_ms": 0.0,
+            "p95_ms": 0.0
+          },
+          "guardar_memoria": {
+            "ejecuciones": 33,
+            "promedio_ms": 56.0,
+            "p95_ms": 84.4
+          },
+          "memoria": {
+            "ejecuciones": 39,
+            "promedio_ms": 302.9,
+            "p95_ms": 101.40000000000002
+          },
+          "planificador": {
+            "ejecuciones": 39,
+            "promedio_ms": 1.2,
+            "p95_ms": 3.0
+          },
+          "redaccion": {
+            "ejecuciones": 39,
+            "promedio_ms": 1.4,
+            "p95_ms": 2.0
+          }
+        },
+        "por_rol_llm": {
+          "auditor": {
+            "llamadas": 33,
+            "promedio_ms": 0.9,
+            "p95_ms": 3.5999999999999943
+          },
+          "planificador": {
+            "llamadas": 39,
+            "promedio_ms": 0.0,
+            "p95_ms": 0.0
+          },
+          "redaccion": {
+            "llamadas": 39,
+            "promedio_ms": 0.3,
+            "p95_ms": 2.0
+          }
+        }
+      },
+      "recursos": {
+        "llamadas_llm": 111,
+        "tokens_entrada_total": 149355,
+        "tokens_salida_total": 12066,
+        "tokens_total": 161421,
+        "tokens_promedio_por_llamada": 1454.2,
+        "proporcion_tokens_estimados": 1.0,
+        "por_rol": {
+          "planificador": {
+            "llamadas": 39,
+            "tokens_entrada": 15270,
+            "tokens_salida": 2868
+          },
+          "auditor": {
+            "llamadas": 33,
+            "tokens_entrada": 93834,
+            "tokens_salida": 4767
+          },
+          "redaccion": {
+            "llamadas": 39,
+            "tokens_entrada": 40251,
+            "tokens_salida": 4431
+          }
+        }
+      }
+    }
+  }
+}
