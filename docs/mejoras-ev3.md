@@ -12,9 +12,9 @@ Es la evidencia de IE7 (mejoras basadas en análisis de datos observados).
 | Hallazgo (`docs/analisis-logs-ev3.md`) | Mejora implementada | Archivos |
 |---|---|---|
 | Consistencia 0.846 en modo real: los escenarios adversarial y ambiguo alternaban veredictos entre corridas idénticas | **A1.** Temperatura 0.0 en el veredicto del auditor + guard determinista anti-manipulación | `src/agent/llm.py`, `src/agent/auditor.py` |
-| El LLM concentra el 96% de la latencia (auditor 28,2 s prom.; planificador 6,2 s; redacción 7,2 s) | **A2.** Modelo ligero `openai/gpt-oss-20b` para el planificador (`GROQ_MODEL_PLANIFICADOR`), topes de seguridad de `max_completion_tokens` por rol (`GROQ_MAX_TOKENS_<ROL>`) | `src/agent/llm.py` |
+| El LLM concentra el 99% de la latencia medida en nodos (en el benchmark v1 real: auditor 28,2 s prom.; redacción 7,2 s; planificador 6,2 s) | **A2.** Modelo ligero `openai/gpt-oss-20b` para el planificador (`GROQ_MODEL_PLANIFICADOR`), topes de seguridad de `max_completion_tokens` por rol (`GROQ_MAX_TOKENS_<ROL>`) | `src/agent/llm.py` |
 | 53 fragmentos recuperados con score < 0.35: contexto débil alimenta alucinaciones e infla tokens | **A3.** Umbral `SCORE_MINIMO=0.35`: los fragmentos no confiables se descartan (evento `retrieval_filtrado`); sin contexto confiable el agente no cita basura | `src/retriever/search.py`, `src/agent/auditor.py`, `src/herramientas/consulta.py` |
-| 9 llamadas degradaron a modo demo por rate limit 429 sin reintento | **A4.** Reintento con backoff exponencial ante 429 (`LLM_REINTENTOS=2`, `LLM_BACKOFF_S=20`) antes de degradar; cada reintento queda trazado (evento `llm_reintento`) | `src/agent/llm.py` |
+| 9 llamadas degradaron a modo demo por rate limit 429 sin reintento en el benchmark v1 real (52 acumuladas en el análisis de logs) | **A4.** Reintento con backoff exponencial ante 429 (`LLM_REINTENTOS=2`, `LLM_BACKOFF_S=20`) antes de degradar; cada reintento queda trazado (evento `llm_reintento`) | `src/agent/llm.py` |
 
 Todos los cambios tienen tests de regresión en `tests/test_mejoras_ev3.py` (14
 tests). Suite completa: 119 tests en verde.

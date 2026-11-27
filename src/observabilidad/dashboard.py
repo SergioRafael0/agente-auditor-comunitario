@@ -24,7 +24,7 @@ from src.observabilidad import analisis, metricas
 
 RUTAS_DEFAULT = {
     "eventos": "data/eventos.jsonl",
-    "ejecuciones": "data/agente_ejecuciones.jsonl",
+    "ejecuciones": "data/eval/ev3/agente_ejecuciones.jsonl",
     "interacciones": "data/interacciones.jsonl",
     "corridas": "data/eval/ev3/corridas.jsonl",
     "judge": "data/eval/judge_results.json",

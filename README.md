@@ -24,7 +24,7 @@ python -m src.grafo.cli --texto "Necesito ayuda con unas cosas del edificio" \
 
 Otras formas de probarlo sin clave:
 
-- `pytest` — 105 tests en verde (todos con LLM mockeado).
+- `pytest` — 119 tests en verde (todos con LLM mockeado).
 - `data/eval/ev2/` — corridas reales del agente (5 escenarios con bitácora).
 - `demo.ipynb` — los mismos ejemplos celda por celda; sin key arranca solo en modo demo.
 
@@ -120,7 +120,7 @@ Expone la herramienta `revisar_publicacion(texto, categoria)`. La configuración
 - `src/agent/` — cliente Groq (con modo demo), prompts del auditor y LLM-as-judge.
 - `src/observabilidad/` — trazas, métricas, análisis de logs y dashboard (Evaluación 3).
 - `src/mcp_server/` — servidor MCP con autenticación, rate limit y auditoría de accesos.
-- `tests/` — 105 tests pytest (mockean LLM y Chroma) con 81% de cobertura.
+- `tests/` — 119 tests pytest (mockean LLM y Chroma) con 81% de cobertura.
 - `scripts/` — demo, benchmark de observabilidad, análisis de logs, evaluación de prompts y smoke test del MCP.
 - `data/eval/` — evidencia de corridas reales.
 

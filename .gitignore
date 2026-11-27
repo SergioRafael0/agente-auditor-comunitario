@@ -52,6 +52,14 @@ Thumbs.db
 # Bloqueos temporales de Office
 ~$*
 
+# Informes y entregables academicos (se entregan por AVA/correo, no se versionan)
+informe*.md
+informe*.pdf
+informe*.docx
+
+# Notebooks de experimentacion (regenerables, no son parte de la app)
+demo.ipynb
+
 # Logs
 *.log
 logs/
